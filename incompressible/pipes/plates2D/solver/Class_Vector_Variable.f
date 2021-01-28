@@ -13,9 +13,9 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
         !
         !
-        !   File name:          mesh_generation
+        !   File name:          Class_Vector_Variable
         !
-        !   Type:               source
+        !   Type:               module / class
         !
         !   Description:        In this file the geometry and the grid is generated according to the input file parameters.
         !

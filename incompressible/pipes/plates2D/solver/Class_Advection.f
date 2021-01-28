@@ -13,9 +13,9 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
         !
         !
-        !   File name:          interpolation
+        !   File name:          Class_Advection
         !
-        !   Type:               source
+        !   Type:               module / class
         !
         !   Description:        In this file the geometry and the grid is generated according to the input file parameters.
         !
