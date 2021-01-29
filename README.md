@@ -10,7 +10,6 @@ To do that first delete all installed version of gfortran and install gfortran-5
 
 ```bash
 $ sudo apt-get remove --auto-remove gfortran
-
 $ sudo apt-get install gfortran-5
 ```
 
