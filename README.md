@@ -6,8 +6,11 @@ Sometimes the latest version of gfortran compiler (the default in Ubuntu 20.04 i
 
 To do that first delete all installed version of gfortran and install gfortran-5, with the following commands.
 
+```bash
 > $ sudo apt-get remove --auto-remove gfortran
+
 > $ sudo apt-get install gfortran-5
+```
 
 Make sure in the Makefile to call the correct compiler:
 
