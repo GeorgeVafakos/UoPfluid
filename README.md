@@ -1,5 +1,6 @@
 # UoPfluid
 
+## Platform
 
 
 ## Known issues
@@ -13,7 +14,7 @@ $ sudo apt-get remove --auto-remove gfortran
 $ sudo apt-get install gfortran-5
 ```
 
-Make sure in the `Makefile` to call the correct compiler:
+Make sure that the `Makefile` calls the correct compiler:
 
 ```Makefile
 CC = gfortran-5
