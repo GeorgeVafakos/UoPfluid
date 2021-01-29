@@ -126,7 +126,7 @@
                     NS_eqn%z%aW = -nu*aW_lapl + NS_adv_term%aW
                     NS_eqn%z%aS = -nu*aS_lapl + NS_adv_term%aS
                     NS_eqn%z%aB = -nu*aB_lapl + NS_adv_term%aB
-                    NS_eqn%z%B  =  aP_time*V%z(nodes_P) - (1.0/rho)*gradz(p%field) + (1.0/rho)*crossz(Je,B)
+                    NS_eqn%z%B  =  aP_time*V%z(nodes_P)
                 end if
             end subroutine
             

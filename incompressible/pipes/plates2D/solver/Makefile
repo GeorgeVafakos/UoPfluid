@@ -1,7 +1,7 @@
 # Makefile
 
-CC = gfortran
-GFLAGS = -Wno-unused-parameter -ffixed-line-length-0 -c
+CC = gfortran-5
+GFLAGS = -O3 -Wno-unused-parameter -ffixed-line-length-0 -c 
 
 SOURCES_MODULES = Class_Axis.f global_variables.f Class_Geometry.f Class_Vector_Variable.f Class_Scalar_Variable.f Class_Vector_Equation.f Class_Scalar_Equation.f Class_Advection.f Class_CFL.f define_classes.f
 SOURCES_SUBPROGRAMS =  subprograms_default.f subprograms_case.f subprograms_print.f

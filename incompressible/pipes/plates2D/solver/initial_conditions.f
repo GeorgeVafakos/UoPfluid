@@ -142,9 +142,9 @@
             Time = obtain_variable('.simulation_info','last_saved_time')
             Iter_count = obtain_variable('.simulation_info','last_saved_iter')
             Dt = obtain_variable('.simulation_info','Dt')
-            allocate(Err_Vx(Iter_count), Err_Vy(Iter_count), Err_p(Iter_count), Err_Bix(Iter_count), Err_Biy(Iter_count), Err_T(Iter_count), Iterations(Iter_count) )
+            allocate(Err_Vx(Iter_count), Err_Vy(Iter_count), Err_p(Iter_count), Iterations(Iter_count) )
             if (flow_2D .eqv. .FALSE.)  then
-                allocate(Err_Vz(Iter_count), Err_Biz(Iter_count))
+                allocate(Err_Vz(Iter_count))
             end if
 
             ! Load initial conditions from last saved results

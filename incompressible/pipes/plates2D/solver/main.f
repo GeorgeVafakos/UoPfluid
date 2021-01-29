@@ -130,7 +130,7 @@
             time_cpu = cputime_finish - cputime_start
 
             ! Print to screen
-            print '(A,I17,A15,F10.4,A16,F9.4,A16,F9.4,A10,F12.8)', 'Iter.', Iter_count,  'Co_mean =', Co%mean, 'Co_max =', Co%max, 'Co_Mag_max =', Co_mag%max, 'Dt =', Dt
+            print '(A,I17,A15,F10.4,A16,F9.4,A10,F12.8)', 'Iter.', Iter_count,  'Co_mean =', Co%mean, 'Co_max =', Co%max, 'Dt =', Dt
             print '(A,A21,ES10.2,A16,I9)', 'Velocity: x-axis', 'Error u =', V%e(1), 'Loops =', NS_eqn%counter(1)
             print '(A,A21,ES10.2,A16,I9)', 'Velocity: y-axis', 'Error v =', V%e(2), 'Loops =', NS_eqn%counter(2)
             print '(A,A21,ES10.2,A16,I9)', 'Velocity: z-axis', 'Error w =', V%e(3), 'Loops =', NS_eqn%counter(3)
