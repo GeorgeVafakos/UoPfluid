@@ -69,7 +69,6 @@
         !------------------------------------------------------------------------------------------
         ! Advection terms
         call NS_adv_term%create_terms(V)
-        ! call NS_max_tens%create_terms(B)
 
         ! Navier-Stokes x-axis terms
         NS_eqn%x%aT = -nu*aT_lapl + NS_adv_term%aT
@@ -79,7 +78,7 @@
         NS_eqn%x%aW = -nu*aW_lapl + NS_adv_term%aW
         NS_eqn%x%aS = -nu*aS_lapl + NS_adv_term%aS
         NS_eqn%x%aB = -nu*aB_lapl + NS_adv_term%aB
-        NS_eqn%x%B  =  aP_time*V%x(nodes_P) - (1.0/rho)*gradx(p%field) + (1.0/rho)*crossx(Je,B) - beta*(T%field(nodes_P)-T0)*g_value*e_g(1)
+        NS_eqn%x%B  =  aP_time*V%x(nodes_P) 
 
         ! Navier-Stokes y-axis terms
         NS_eqn%y%aT = -nu*aT_lapl + NS_adv_term%aT
@@ -89,7 +88,7 @@
         NS_eqn%y%aW = -nu*aW_lapl + NS_adv_term%aW
         NS_eqn%y%aS = -nu*aS_lapl + NS_adv_term%aS
         NS_eqn%y%aB = -nu*aB_lapl + NS_adv_term%aB
-        NS_eqn%y%B  =  aP_time*V%y(nodes_P) - (1.0/rho)*grady(p%field) + (1.0/rho)*crossy(Je,B) - beta*(T%field(nodes_P)-T0)*g_value*e_g(2)
+        NS_eqn%y%B  =  aP_time*V%y(nodes_P) 
 
         ! Navier-Stokes z-axis terms
         if (flow_2D .eqv. .FALSE.)  then
@@ -100,7 +99,7 @@
             NS_eqn%z%aW = -nu*aW_lapl + NS_adv_term%aW
             NS_eqn%z%aS = -nu*aS_lapl + NS_adv_term%aS
             NS_eqn%z%aB = -nu*aB_lapl + NS_adv_term%aB
-            NS_eqn%z%B  =  aP_time*V%z(nodes_P) - (1.0/rho)*gradz(p%field) + (1.0/rho)*crossz(Je,B) - beta*(T%field(nodes_P)-T0)*g_value*e_g(3)
+            NS_eqn%z%B  =  aP_time*V%z(nodes_P) 
         end if
 
 

@@ -44,7 +44,6 @@
 
             ! Declare CFL number for Navier-Stokes
             type (CFL_number) :: Co
-            type (CFL_number) :: Co_mag
 
 
         contains

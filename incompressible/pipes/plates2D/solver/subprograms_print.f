@@ -57,30 +57,19 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
-                call csvwrite('Bix.csv',Bi%x)
-                call csvwrite('Biy.csv',Bi%y)
-                call csvwrite('Bo.csv',Bo%y)
-                call csvwrite('Jex.csv',Je%x)
-                call csvwrite('Jey.csv',Je%y)
-                call csvwrite('T.csv',T%field)
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', empty)
                 call csvwrite('Err_v.csv', empty)
                 call csvwrite('Err_p.csv', empty)
-                call csvwrite('Err_Bix.csv', empty)
-                call csvwrite('Err_Biy.csv', empty)
-                call csvwrite('Err_T.csv', Err_T)
                 call csvwrite('Iterations.csv', empty)
 
                 ! 3rd dimension
                 if (flow_2D .eqv. .FALSE.)  then
                     call csvwrite('z_nodes.csv', z%nodes)
                     call csvwrite('w.csv',V%z)
-                    call csvwrite('Biz.csv',Bi%z)
-                    call csvwrite('Jez.csv',Je%z)
                     call csvwrite('Err_w.csv', empty)
-                    call csvwrite('Err_Biz.csv', empty)
+
                 end if
                 
                 call system('cp ../plots.py plots.py')
@@ -110,30 +99,18 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
-                call csvwrite('Bix.csv',Bi%x)
-                call csvwrite('Biy.csv',Bi%y)
-                call csvwrite('Bo.csv',Bo%y)
-                call csvwrite('Jex.csv',Je%x)
-                call csvwrite('Jey.csv',Je%y)
-                call csvwrite('T.csv',T%field)
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', Err_Vx)
                 call csvwrite('Err_v.csv', Err_Vy)
                 call csvwrite('Err_p.csv', Err_p)
-                call csvwrite('Err_Bix.csv', Err_Bix)
-                call csvwrite('Err_Biy.csv', Err_Biy)
-                call csvwrite('Err_T.csv', Err_T)
                 call csvwrite('Iterations.csv', Iterations)
 
                 ! 3rd dimension
                 if (flow_2D .eqv. .FALSE.)  then
                     call csvwrite('z_nodes.csv', z%nodes)
                     call csvwrite('w.csv',V%z)
-                    call csvwrite('Biz.csv',Bi%z)
-                    call csvwrite('Jez.csv',Je%z)
                     call csvwrite('Err_w.csv', Err_Vz)
-                    call csvwrite('Err_Biz.csv', Err_Biz)
                 end if
                 
                 call system('cp ../plots.py plots.py')
@@ -161,30 +138,19 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
-                call csvwrite('Bix.csv',Bi%x)
-                call csvwrite('Biy.csv',Bi%y)
-                call csvwrite('Bo.csv',Bo%y)
-                call csvwrite('Jex.csv',Je%x)
-                call csvwrite('Jey.csv',Je%y)
-                call csvwrite('T.csv',T%field)
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', Err_Vx)
                 call csvwrite('Err_v.csv', Err_Vy)
                 call csvwrite('Err_p.csv', Err_p)
-                call csvwrite('Err_Bix.csv', Err_Bix)
-                call csvwrite('Err_Biy.csv', Err_Biy)
-                call csvwrite('Err_T.csv', Err_T)
                 call csvwrite('Iterations.csv', Iterations)
 
                 ! 3rd dimension
                 if (flow_2D .eqv. .FALSE.)  then
                     call csvwrite('z_nodes.csv', z%nodes)
                     call csvwrite('w.csv',V%z)
-                    call csvwrite('Biz.csv',Bi%z)
-                    call csvwrite('Jez.csv',Je%z)
                     call csvwrite('Err_w.csv', Err_Vz)
-                    call csvwrite('Err_Biz.csv', Err_Biz)
+
                 end if
 
                 call system('cp ../../plots.py plots.py')
@@ -326,14 +292,14 @@
                 print '(A)',                 ' |    =========                                 ==============='
                 print '(A)',                 ' | '
                 print '(A,I12,A22,F12.1)',    ' |    Total Cells:', TotalCells, 'Re =', Re
-                print '(A,I12,A22,F12.1)',    ' |    Total Nodes:', TotalNodes, 'Ha =', Ha
-                print '(A,I12,A22,E12.1)',    ' |    Total Faces:', TotalFaces, 'Rm =', Rm
-                print '(A,I15,A22,E12.1)',    ' |    Cells x =', cells_x, 'nu =', nu
-                print '(A,I15,A22,E12.1)',    ' |    Cells y =', cells_y, 'rho =', rho
-                print '(A,I15,A22,E12.1)',    ' |    Cells z =', k_boole*cells_z, 'mu =', mu
-                print '(A,F20.4,A22,E12.1)',   ' |    Px =', x%P, 'sigma =', sigma
-                print '(A,F20.4,A22,E12.1)',   ' |    Qx =', x%Q, 'Dt =', Dt
-                print '(A,F20.4,A22,E12.1)',   ' |    Py =', y%P, 'r =', r
+                print '(A,I12,A22,F12.1)',    ' |    Total Nodes:', TotalNodes, 'nu =', nu
+                print '(A,I12,A22,E12.1)',    ' |    Total Faces:', TotalFaces, 'rho =', rho
+                print '(A,I15,A22,E12.1)',    ' |    Cells x =', cells_x, 'Dt =', Dt
+                print '(A,I15,A22,E12.1)',    ' |    Cells y =', cells_y
+                print '(A,I15,A22,E12.1)',    ' |    Cells z =', k_boole*cells_z
+                print '(A,F20.4,A22,E12.1)',   ' |    Px =', x%P
+                print '(A,F20.4,A22,E12.1)',   ' |    Qx =', x%Q
+                print '(A,F20.4,A22,E12.1)',   ' |    Py =', y%P
                 print '(A,F20.4,A22,E12.1)',   ' |    Qy =', y%Q
                 print '(A,F20.4,A22,E12.1)',   ' |    Pz =', k_boole*z%P
                 print '(A,F20.4,A22,F12.1)',   ' |    Qz =', k_boole*z%Q
@@ -419,12 +385,6 @@
                     write(unit, '(A)') trim(adjustl(dir_name))
                     write(unit, '(A)') 'rho'
                     write(dir_name,'(F18.8)') rho
-                    write(unit, '(A)') trim(adjustl(dir_name))
-                    write(unit, '(A)') 'mu'
-                    write(dir_name,'(F18.8)') mu
-                    write(unit, '(A)') trim(adjustl(dir_name))
-                    write(unit, '(A)') 'sigma'
-                    write(dir_name,'(F18.8)') sigma
                     write(unit, '(A)') trim(adjustl(dir_name))
                     write(unit, '(A)') 'Dt'
                     write(dir_name,'(F18.8)') Dt

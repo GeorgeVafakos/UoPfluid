@@ -111,71 +111,12 @@
                 end if
             end do
 
-            ! Update induction equation terms
-            call update_induction_terms()
-
-            ! Solve induction equation
-            call Ind_eqn%solve(domain, Bi, Bix_BC, Biy_BC, Biz_BC, 100, 1.0d-6, 1.0d-6, 1.0d-6, 1.0d-12)
-
-            ! CVP algorithm
-            dB%x = 0.0
-            dB%y = 0.0
-            dB%z = 0.0
-            CVP_counter = 0
-            do
-                CVP_counter = CVP_counter + 1
-
-                B%x = Bi%x + Bo%x
-                B%y = Bi%y + Bo%y
-                B%z = Bi%z + Bo%z
-
-                ! Create G
-                call create_G()
-
-                ! Solve the magnetic field correction equation
-                call dB_eqn%solve(domain, dB, dBx_BC, dBy_BC, dBz_BC, 1, 1.0d-6, 1.0d-6, 1.0d-6, 1.0d-12)
-
-                ! Correct magnetic field
-                Bi%x = Bi%x + dB%x
-                Bi%y = Bi%y + dB%y
-                Bi%z = Bi%z + dB%z
-                call Bi%BC_Adjust_x(domain, Bix_BC)
-                call Bi%BC_Adjust_y(domain, Biy_BC)
-                call Bi%BC_Adjust_z(domain, Biz_BC)
-
-                ! Calculate magnetic divergence error
-                call Bi%calc_mean_div_error
-
-                if (abs(Bi%mean_div_error) <= 1.0d-3 .OR. CVP_counter==100) then
-                    exit
-                end if
-            end do
-
-            ! Calculate total magnetic field
-            B%x = Bi%x + Bo%x
-            B%y = Bi%y + Bo%y
-            B%z = Bi%z + Bo%z
-
-            ! Calculate electric current density
-            Je%x(nodes_P) = (1.0/mu)*curlx(Bi)
-            Je%y(nodes_P) = (1.0/mu)*curly(Bi)
-            Je%z(nodes_P) = (1.0/mu)*curlz(Bi)
-
-            ! Update heat transport terms
-            call update_heat_terms()
-
-            ! Solve heat transport equation
-            call Heat_eqn%solve(domain, T, T_BC, 100, 1.0d-6, 1.0d-12)
-
             ! Calculate CFL condition or Adjust time step
             call Co%CFL_condition(V)
-            call Co_mag%CFL_condition(B)
 
             ! Create Error arrays with increasing size
             call relative_residual(V, V_old, 1.0d-12)
             call relative_residual(p, p_old, 1.0d-12)
-            call relative_residual(Bi, Bi_old, 1.0d-12)
-            call relative_residual(T, T_old, 1.0d-12)
             call calculate_residual_arrays()
 
             ! Save results
@@ -194,18 +135,13 @@
             print '(A,A21,ES10.2,A16,I9)', 'Velocity: y-axis', 'Error v =', V%e(2), 'Loops =', NS_eqn%counter(2)
             print '(A,A21,ES10.2,A16,I9)', 'Velocity: z-axis', 'Error w =', V%e(3), 'Loops =', NS_eqn%counter(3)
             print '(A,A29,ES10.2,A16,I9,A16,ES9.2)', 'Pressure', 'Error p =', p%e, 'PISO Loops =', PISO_counter, 'Div_Err = ', V%mean_div_error
-            print '(A,A15,ES10.2,A16,I9)', 'Magnetic Field: x-axis', 'Error Bx =', Bi%e(1), 'Loops =', Ind_eqn%counter(1)
-            print '(A,A15,ES10.2,A16,I9)', 'Magnetic Field: y-axis', 'Error By =', Bi%e(2), 'Loops =', Ind_eqn%counter(2)
-            print '(A,A15,ES10.2,A16,I9)', 'Magnetic Field: z-axis', 'Error Bz =', Bi%e(3), 'Loops =', Ind_eqn%counter(3)
-            print '(A,A19,ES9.2,A16,I9,A15,ES9.2)', 'Magnetic Divergence', 'Mag_Div_Err = ', Bi%mean_div_error, 'CVP Loops =', CVP_counter
-            print '(A,A26,ES10.2,A16,I9)', 'Temperature', 'Error T =', T%e, 'Loops =', Heat_eqn%counter
             print '(A,F10.5,A4,/)', 'CPU time =',time_cpu,'sec'
 
             ! Start elapsed cpu time for the next time step
             call cpu_time(cputime_start)
 
             ! Check if fully developed flow
-            if (V%e(1)<=1.0d-6 .AND. V%e(2)<=1.0d-6 .AND. V%e(3)<=1.0d-6 .AND. p%e<=1.0d-6 .AND. Bi%e(1)<=1.0d-6 .AND. Bi%e(2)<=1.0d-6 .AND. Bi%e(3)<=1.0d-6 .AND. T%e<=1.0d-6 .AND. NS_eqn%counter(1)<=1 .AND. NS_eqn%counter(2)<=1 .AND. NS_eqn%counter(3)<=1 .AND. PISO_counter<=1 .AND. Ind_eqn%counter(1)<=1 .AND. Ind_eqn%counter(2)<=1 .AND. Ind_eqn%counter(3)<=1 .AND. CVP_counter<=1 .AND. Heat_eqn%counter<=1) then
+            if (V%e(1)<=1.0d-6 .AND. V%e(2)<=1.0d-6 .AND. V%e(3)<=1.0d-6 .AND. p%e<=1.0d-6 .AND. NS_eqn%counter(1)<=1 .AND. NS_eqn%counter(2)<=1 .AND. NS_eqn%counter(3)<=1 .AND. PISO_counter<=1) then
                 print *, 'Fully developed flow'
                 call print_sim_results_final()
                 call update_sim_info()
