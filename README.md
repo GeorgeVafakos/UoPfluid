@@ -14,4 +14,6 @@ To do that first delete all installed version of gfortran and install gfortran-5
 
 Make sure in the Makefile to call the correct compiler:
 
+```Makefile
 CC = gfortran-5
+```
