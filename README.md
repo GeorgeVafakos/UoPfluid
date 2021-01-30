@@ -6,9 +6,7 @@ A Computational Fluid Dynamic multi-solver code, that is targeted in the solutio
 ## Solvers and Capabilities
 
 
-## Published work
 
-1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, *Fusion Engineering and Design*, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.111477
 
 
 ## Troubleshooting
@@ -27,6 +25,10 @@ Make sure that the `Makefile` calls the correct compiler:
 ```Makefile
 CC = gfortran-5
 ```
+
+## Published work
+
+1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, *Fusion Engineering and Design*, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.111477
 
 ## License
 
