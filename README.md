@@ -7,12 +7,15 @@ The code is written in object-oriented Fortran, while the flow is visualized wit
 
 ## Solvers and Capabilities
 
-### Fluid Dynamics
+
+
 #### Fluid Dynamics
-##### Fluid Dynamics
-###### Fluid Dynamics
 
 
+## Published articles using the UoPfluid code
+
+1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, Fusion Engineering and Design, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.
+111477
 
 
 ## Troubleshooting
