@@ -7,23 +7,13 @@ The code is written in object-oriented Fortran, while the flow is visualized wit
 
 ## Solvers and Capabilities
 
-<details>
-<summary> __Incompressible__ </summary>
-<p>Content 1 Content 1 Content 1 Content 1 Content 1</p>
-</details>
-
-</details>
-<summary> **Fluid Dynamics** </summary>
-<p>Content 1 </p>
-</details>
-
 
 
 
 
 ## Published work
 
-1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, Fusion Engineering and Design, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.111477
+1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, *Fusion Engineering and Design*, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.111477
 
 
 ## Troubleshooting
