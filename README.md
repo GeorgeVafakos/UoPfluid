@@ -26,7 +26,7 @@ Make sure that the `Makefile` calls the correct compiler:
 CC = gfortran-5
 ```
 
-## Published work
+## Published work using UoPfluid
 
 1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, *Fusion Engineering and Design*, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.111477
 
