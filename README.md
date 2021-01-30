@@ -7,10 +7,10 @@ The code is written in object-oriented Fortran, while the flow is visualized wit
 
 ## Solvers and Capabilities
 
-Markup : <details>
-           <summary>Title 1</summary>
-           <p>Content 1 Content 1 Content 1 Content 1 Content 1</p>
-         </details>
+<details>
+<summary>Title 1</summary>
+<p>Content 1 Content 1 Content 1 Content 1 Content 1</p>
+</details>
 
 
 #### Fluid Dynamics
