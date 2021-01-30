@@ -8,8 +8,11 @@ The code is written in object-oriented Fortran, while the flow is visualized wit
 ## Solvers and Capabilities
 
 <details>
-<summary> **Incompressible** </summary>
+<summary> __Incompressible__ </summary>
 <p>Content 1 Content 1 Content 1 Content 1 Content 1</p>
+</details>
+
+</details>
 <summary> **Fluid Dynamics** </summary>
 <p>Content 1 </p>
 </details>
