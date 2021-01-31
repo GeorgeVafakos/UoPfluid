@@ -1,18 +1,14 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        !                                                                                     !
-        !    ______    ______        _________                                                !   Version: 2.0
-        !      ||        ||            ||    \\     ___                             ____      !
-        !      ||        ||            ||     ||   // \\ ==||                        ||       !
-        !      ||        ||            ||     ||  ||  //   ||                        ||       !
-        !      ||        ||    ____    ||____//   ||       ||  ____  ____   ο    ____||       !
-        !      ||        ||   //  \\   ||       ==||==     ||   ||    ||  =||   //   ||       !
+        !    ______    ______        _________                                                !     
+        !      ||        ||            ||    \\     ___                             ____      !     Version:    2.0
+        !      ||        ||            ||     ||   // \\ ==||                        ||       !     
+        !      ||        ||            ||     ||  ||  //   ||                        ||       !     Creator:    George Vafakos
+        !      ||        ||    ____    ||____//   ||       ||  ____  ____   ο    ____||       !     
+        !      ||        ||   //  \\   ||       ==||==     ||   ||    ||  =||   //   ||       !     Site:       https://github.com/GeorgeVafakos/UoPfluid
         !      ||        ||  ||    ||  ||         ||       ||   ||    ||   ||  ||    ||       !
-        !       \\______//    \\__// __||__     __||__   __||__  \\__//   _||_  \\___||_      !
-        !                                                                                     !
+        !       \\______//    \\__// __||__     __||__   __||__  \\__//   _||_  \\___||_      !     
         !                                                                                     !
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        ! 
-        ! 
         ! 
         ! 
         !   Solver:             pipe_PISO
@@ -22,8 +18,6 @@
         ! 
         !   Algorithms:         Jacobi, Gauss-Seidel, SOR
         !                       
-        ! 
-        ! 
         ! 
 
 
@@ -80,7 +74,6 @@
 
             ! Solve diffusion equation
             call NS_eqn%solve(domain, V, Vx_BC, Vy_BC, Vz_BC, 100, 1.0d-6, 1.0d-6, 1.0d-6, 1.0d-12)
-
             ! Create A matrix
             call create_A()
 
@@ -94,14 +87,15 @@
 
                 ! Calculate pressure
                 call Pres_eqn%solve(domain, p, p_BC, 1, 1.0d-6, 1.0d-12)
-
                 ! Update velocity
                 V%x(nodes_P) = H%x(nodes_P) - (1.0/rho)*gradx(p%field)/A
                 V%y(nodes_P) = H%y(nodes_P) - (1.0/rho)*grady(p%field)/A
                 V%z(nodes_P) = H%z(nodes_P) - (1.0/rho)*gradz(p%field)/A
                 call V%BC_Adjust_x(domain, Vx_BC)
                 call V%BC_Adjust_y(domain, Vy_BC)
-                call V%BC_Adjust_z(domain, Vz_BC)
+                ! if (flow_2D .eqv. .FALSE.)  then
+                    call V%BC_Adjust_z(domain, Vz_BC)
+                ! end if
 
                 ! Calculate divergence error
                 call V%calc_mean_div_error
@@ -130,12 +124,16 @@
             time_cpu = cputime_finish - cputime_start
 
             ! Print to screen
-            print '(A,I17,A15,F10.4,A16,F9.4,A10,F12.8)', 'Iter.', Iter_count,  'Co_mean =', Co%mean, 'Co_max =', Co%max, 'Dt =', Dt
-            print '(A,A21,ES10.2,A16,I9)', 'Velocity: x-axis', 'Error u =', V%e(1), 'Loops =', NS_eqn%counter(1)
-            print '(A,A21,ES10.2,A16,I9)', 'Velocity: y-axis', 'Error v =', V%e(2), 'Loops =', NS_eqn%counter(2)
-            print '(A,A21,ES10.2,A16,I9)', 'Velocity: z-axis', 'Error w =', V%e(3), 'Loops =', NS_eqn%counter(3)
-            print '(A,A29,ES10.2,A16,I9,A16,ES9.2)', 'Pressure', 'Error p =', p%e, 'PISO Loops =', PISO_counter, 'Div_Err = ', V%mean_div_error
-            print '(A,F10.5,A4,/)', 'CPU time =',time_cpu,'sec'
+            if (mod(Iter_count,print_to_screen)==0) then
+                print '(A,I17,A15,F10.4,A16,F9.4,A10,F12.8)', 'Iter.', Iter_count,  'Co_mean =', Co%mean, 'Co_max =', Co%max, 'Dt =', Dt
+                print '(A,A21,ES10.2,A16,I9)', 'Velocity: x-axis', 'Error u =', V%e(1), 'Loops =', NS_eqn%counter(1)
+                print '(A,A21,ES10.2,A16,I9)', 'Velocity: y-axis', 'Error v =', V%e(2), 'Loops =', NS_eqn%counter(2)
+                if (flow_2D .eqv. .FALSE.)  then
+                print '(A,A21,ES10.2,A16,I9)', 'Velocity: z-axis', 'Error w =', V%e(3), 'Loops =', NS_eqn%counter(3)
+                end if
+                print '(A,A29,ES10.2,A16,I9,A16,ES9.2)', 'Pressure', 'Error p =', p%e, 'PISO Loops =', PISO_counter, 'Div_Err = ', V%mean_div_error
+                print '(A,F10.5,A4,/)', 'CPU time =',time_cpu,'sec'
+            end if
 
             ! Start elapsed cpu time for the next time step
             call cpu_time(cputime_start)

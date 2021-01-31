@@ -11,7 +11,7 @@ A Computational Fluid Dynamic multi-solver code, that is targeted in the solutio
 
 ## Troubleshooting
 
-It has been reported that sometimes in Ubuntu 20.04 LTS the latest version of `gfortran` compiler fails to compile the solvers. To get around this issue install an older version of `gfortran`, such as version 5. The current version can be found with the `gfortran --version` command.
+Sometimes in Ubuntu 20.04 LTS the latest version of `gfortran` compiler fails to compile the solvers. To get around this issue install an older version of `gfortran`, such as version 5. The current version can be found with the `gfortran --version` command.
 
 To do that first delete all installed versions of `gfortran` and install `gfortran-5`, with the following commands.
 

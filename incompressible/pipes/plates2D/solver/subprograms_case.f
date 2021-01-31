@@ -1,14 +1,12 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        !                                                                                     !
-        !    ______    ______        _________                                                !   Version: 2.0
-        !      ||        ||            ||    \\     ___                             ____      !
-        !      ||        ||            ||     ||   // \\ ==||                        ||       !
-        !      ||        ||            ||     ||  ||  //   ||                        ||       !
-        !      ||        ||    ____    ||____//   ||       ||  ____  ____   ο    ____||       !
-        !      ||        ||   //  \\   ||       ==||==     ||   ||    ||  =||   //   ||       !
+        !    ______    ______        _________                                                !     
+        !      ||        ||            ||    \\     ___                             ____      !     Version:    2.0
+        !      ||        ||            ||     ||   // \\ ==||                        ||       !     
+        !      ||        ||            ||     ||  ||  //   ||                        ||       !     Creator:    George Vafakos
+        !      ||        ||    ____    ||____//   ||       ||  ____  ____   ο    ____||       !     
+        !      ||        ||   //  \\   ||       ==||==     ||   ||    ||  =||   //   ||       !     Site:       https://github.com/GeorgeVafakos/UoPfluid
         !      ||        ||  ||    ||  ||         ||       ||   ||    ||   ||  ||    ||       !
         !       \\______//    \\__// __||__     __||__   __||__  \\__//   _||_  \\___||_      !
-        !                                                                                     !
         !                                                                                     !
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
         ! 
@@ -149,7 +147,9 @@
                 H%z(nodes_P) = k_boole*(-NS_eqn%z%aT*V%z(nodes_T)-NS_eqn%z%aN*V%z(nodes_N)-NS_eqn%z%aE*V%z(nodes_E)-NS_eqn%z%aW*V%z(nodes_W)-NS_eqn%z%aS*V%z(nodes_S)-        NS_eqn%z%aB*V%z(nodes_B) + aP_time*V_old%z(nodes_P) )/A
                 call H%BC_Adjust_x(domain, Vx_BC)
                 call H%BC_Adjust_y(domain, Vy_BC)
-                call H%BC_Adjust_z(domain, Vz_BC)
+                if (flow_2D .eqv. .FALSE.)  then
+                    call H%BC_Adjust_z(domain, Vz_BC)
+                end if
 
                 ! Update Poisson equation B matrix (from the system Ax=B)
                 Pres_eqn%B  = A*div(H)

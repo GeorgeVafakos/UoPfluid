@@ -1,14 +1,12 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
-#                                                                                      !
-#    ______    ______        _________                                                 !   Version: 2.0    
-#      ||        ||            ||    \\     ___                              ____      !
-#      ||        ||            ||     ||   // \\ ==||                         ||       !
-#      ||        ||            ||     ||  ||  //   ||                         ||       !
+#    ______    ______        _________                                                 !   
+#      ||        ||            ||    \\     ___                              ____      !    Version:    2.0
+#      ||        ||            ||     ||   // \\ ==||                         ||       !    
+#      ||        ||            ||     ||  ||  //   ||                         ||       !    Creator:    George Vafakos
 #      ||        ||    ____    ||____//   ||       ||  ____  ____    ο    ____||       !
-#      ||        ||   //  \\   ||       ==||==     ||   ||    ||   =||   //   ||       !
+#      ||        ||   //  \\   ||       ==||==     ||   ||    ||   =||   //   ||       !    Site:       https://github.com/GeorgeVafakos/UoPfluid
 #      ||        ||  ||    ||  ||         ||       ||   ||    ||    ||  ||    ||       !
 #       \\______//    \\__// __||__     __||__   __||__  \\___/|_  _||_  \\___||__     !
-#                                                                                      !
 #                                                                                      !
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 # 
@@ -26,7 +24,7 @@
 #------------------------------------------------------------------------------
 # Determine whether the flow will be 2D or 3D
 flow_2D
-.FALSE.
+.TRUE.
 
 #------------------------------------------------------------------------------
 # Mesh Generation Parameters
@@ -37,9 +35,6 @@ cells_x
 # Number of cells in y-axis
 cells_y
 31
-# Number of cells in z-axis
-cells_z
-61
 # Start of x-axis
 x_begin
 -1.0
@@ -52,27 +47,32 @@ y_begin
 # End of y-axis
 y_end
 1.0
+# x-axis stretch type (see read_input.f)
+X_stretch
+two_way_stretch
+0.1
+3.0
+# y-axis stretch type (see read_input.f)
+Y_stretch
+two_way_stretch
+0.1
+3.0
+
 # Start of x-axis
 z_begin
 0.0
 # End of x-axis
 z_end
-50.0
-# x-axis stretch type (see read_input.f)
-X_stretch
-mhd_vafakos_stretch_SideLayer
-12
-50.0
+20.0
+# Number of cells in z-axis
+cells_z
+30
 # y-axis stretch type (see read_input.f)
-Y_stretch
-mhd_vafakos_stretch_HartLayer
-10
-50.0
-# z-axis stretch type (see read_input.f)
 Z_stretch
-one_way_stretch
+two_way_stretch
 0.1
 3.0
+
 
 #------------------------------------------------------------------------------
 # Boundary Names
@@ -107,9 +107,9 @@ Co
 #------------------------------------------------------------------------------
 # Inlet
 V_inlet
-custom_inlet
-V.csv
-57.9383
+fixed
+1.0
+0.0
 # Outlet
 V_outlet
 zero_gradient
@@ -119,15 +119,16 @@ no_slip
 # Bottom wall
 V_botWall
 no_slip
+# Initial conditions
+V_init
+fixed_zero
+
 # Front wall
 V_frontWall
 no_slip
 # Back wall
 V_backWall
 no_slip
-# Initial conditions
-V_init
-fixed_zero
 
 #------------------------------------------------------------------------------
 # Pressure boundary conditions
@@ -144,15 +145,16 @@ zero_gradient
 # Bottom wall
 p_botWall
 zero_gradient
+# Initial conditions
+p_init
+fixed_zero
+
 # Front wall
 p_frontWall
 zero_gradient
 # Back wall
 p_backWall
 zero_gradient
-# Initial conditions
-p_init
-fixed_zero
 
 #------------------------------------------------------------------------------
 # Solution schemes (Jacobi, Gauss_Seidel or SOR)
@@ -170,6 +172,9 @@ Gauss_Seidel
 # Print results to file
 print_results
 10000
+# Print results to screen
+print_to_screen
+10
 # Start from ('begining' or 'latest_time')
 start
 begining
