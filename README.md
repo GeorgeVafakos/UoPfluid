@@ -6,7 +6,14 @@ A Computational Fluid Dynamic multi-solver code, that is targeted in the solutio
 ## Solvers and Capabilities
 
 
+## Installation
 
+To install the source code in your local system, browse to the desired directory and run the command
+
+```bash
+$ git clone https://github.com/GeorgeVafakos/UoPfluid.git
+```
+The `UoPfluid` code needs the `GNU gfortran` compiler and the `matplotlib` python library. The `matplotlib` is included in the `anaconda` package.
 
 
 ## Troubleshooting
