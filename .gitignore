@@ -1,2 +1,3 @@
 *.mod
 *.o
+.simulation_info
