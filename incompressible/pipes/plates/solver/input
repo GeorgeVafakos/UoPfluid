@@ -56,22 +56,6 @@ two_way_stretch
 0.1
 3.0
 
-# Start of x-axis
-z_begin
-0.0
-# End of x-axis
-z_end
-20.0
-# Number of cells in z-axis
-cells_z
-30
-# y-axis stretch type (see read_input.f)
-Z_stretch
-two_way_stretch
-0.1
-3.0
-
-
 #------------------------------------------------------------------------------
 # Boundary Names
 #------------------------------------------------------------------------------
@@ -121,13 +105,6 @@ no_slip
 V_init
 fixed_zero
 
-# Front wall
-V_frontWall
-no_slip
-# Back wall
-V_backWall
-no_slip
-
 #------------------------------------------------------------------------------
 # Pressure boundary conditions
 #------------------------------------------------------------------------------
@@ -146,13 +123,6 @@ zero_gradient
 # Initial conditions
 p_init
 fixed_zero
-
-# Front wall
-p_frontWall
-zero_gradient
-# Back wall
-p_backWall
-zero_gradient
 
 #------------------------------------------------------------------------------
 # Solution schemes (Jacobi, Gauss_Seidel or SOR)

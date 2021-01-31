@@ -110,25 +110,26 @@
 
                 type (duct) :: domain
                 type (Vector_Variable) :: Var
-                type (Vector_Variable_BC), dimension(domain%NumberBoundaries) :: VarX_BC, VarY_BC, VarZ_BC
+                type (Vector_Variable_BC), dimension(domain%NumberBoundaries) :: VarX_BC, VarY_BC
+                type (Vector_Variable_BC), optional, dimension(domain%NumberBoundaries) :: VarZ_BC
 
                 do i = 1, domain%NumberBoundaries
                     if (Var%typeBC(i) == 'zero_gradient') then
                         VarX_BC(i)%boundary_condition => neumann_vect
                         VarY_BC(i)%boundary_condition => neumann_vect
-                        if (flow_2D .eqv. .FALSE.) then
+                        if (present(VarZ_BC)) then
                             VarZ_BC(i)%boundary_condition => neumann_vect
                         end if
                     else if (Var%typeBC(i) == 'finite_cond_wall') then
                         VarX_BC(i)%boundary_condition => robin_vect
                         VarY_BC(i)%boundary_condition => robin_vect
-                        if (flow_2D .eqv. .FALSE.)  then
+                        if (present(VarZ_BC)) then
                             VarZ_BC(i)%boundary_condition => robin_vect
                         end if
                     else
                         VarX_BC(i)%boundary_condition => dirichlet_vect
                         VarY_BC(i)%boundary_condition => dirichlet_vect
-                        if (flow_2D .eqv. .FALSE.) then
+                        if (present(VarZ_BC)) then
                             VarZ_BC(i)%boundary_condition => dirichlet_vect
                         end if
                     end if
@@ -140,7 +141,7 @@
                         VarX_BC(i)%value = VarX_BC(i)%characteristic_valueBC
                         VarY_BC(i)%value = VarY_BC(i)%characteristic_valueBC
                     end if
-                    if (flow_2D .eqv. .FALSE.) then
+                    if (present(VarZ_BC)) then
                         VarZ_BC(i)%value = VarZ_BC(i)%characteristic_valueBC
                     end if
                 end do

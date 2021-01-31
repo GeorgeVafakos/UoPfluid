@@ -75,6 +75,7 @@
 
             ! Solve diffusion equation
             call NS_eqn%solve(domain, V, Vx_BC, Vy_BC, Vz_BC, 100, 1.0d-6, 1.0d-6, 1.0d-6, 1.0d-12)
+
             ! Create A matrix
             call create_A()
 
@@ -88,15 +89,14 @@
 
                 ! Calculate pressure
                 call Pres_eqn%solve(domain, p, p_BC, 1, 1.0d-6, 1.0d-12)
+
                 ! Update velocity
                 V%x(nodes_P) = H%x(nodes_P) - (1.0/rho)*gradx(p%field)/A
                 V%y(nodes_P) = H%y(nodes_P) - (1.0/rho)*grady(p%field)/A
                 V%z(nodes_P) = H%z(nodes_P) - (1.0/rho)*gradz(p%field)/A
                 call V%BC_Adjust_x(domain, Vx_BC)
                 call V%BC_Adjust_y(domain, Vy_BC)
-                ! if (flow_2D .eqv. .FALSE.)  then
-                    call V%BC_Adjust_z(domain, Vz_BC)
-                ! end if
+                call V%BC_Adjust_z(domain, Vz_BC)
 
                 ! Calculate divergence error
                 call V%calc_mean_div_error
