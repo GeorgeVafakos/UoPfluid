@@ -41,7 +41,7 @@ $ sudo apt-get remove --auto-remove gfortran
 $ sudo apt-get install gfortran-5
 ```
 
-After installing `gfortran-5` make it the default gfortran version with the commands:
+After installing `gfortran-5` make it the default version with the commands:
 
 ```bash
 $ sudo update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-5 60
