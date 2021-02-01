@@ -35,10 +35,10 @@ cells_y
 31
 # Start of x-axis
 x_begin
-0.0
+-1.0
 # End of x-axis
 x_end
-10.0
+1.0
 # Start of y-axis
 y_begin
 -1.0
@@ -47,7 +47,7 @@ y_end
 1.0
 # x-axis stretch type (see read_input.f)
 X_stretch
-one_way_stretch
+two_way_stretch
 0.1
 3.0
 # y-axis stretch type (see read_input.f)
@@ -139,10 +139,10 @@ Gauss_Seidel
 #------------------------------------------------------------------------------
 # Print results to file
 print_results
-50000
+10000
 # Print results to screen
 print_to_screen
-1000
+10
 # Start from ('begining' or 'latest_time')
 start
 begining
