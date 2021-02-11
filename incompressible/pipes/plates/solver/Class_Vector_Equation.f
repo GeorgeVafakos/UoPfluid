@@ -20,6 +20,7 @@
         ! 
 
         module Class_Vector_Equation
+            use omp_lib
             use global_variables
             use Class_Geometry
             use Class_Vector_Variable
@@ -70,17 +71,22 @@
                 integer max_count
                 real*8  :: Error(TotalNodes)
                 real*8  e, small_numbr
-                
+
                 ! x-component of equation
                 var_old = Var%x
                 Eqn%counter(1) = 0
+
                 do 
                     Eqn%counter(1) = Eqn%counter(1) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%x(glob_index(ID)) = (1.0/Eqn%x%aP(ID))*(Eqn%x%B(ID)  - Eqn%x%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%x%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%x%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%x%aW(ID)*Var_old(glob_index(ID)-1) - Eqn%x%aS(ID)*Var_old(glob_index(ID)-x%NumberNodes) - Eqn%x%aB(ID)*Var_old(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
 
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_x(domain, VarX_BC)
@@ -104,9 +110,14 @@
                     Eqn%counter(2) = Eqn%counter(2) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%y(glob_index(ID)) = (1.0/Eqn%y%aP(ID))*(Eqn%y%B(ID)  - Eqn%y%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%y%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%y%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%y%aW(ID)*Var_old(glob_index(ID)-1) - Eqn%y%aS(ID)*Var_old(glob_index(ID)-x%NumberNodes) - Eqn%y%aB(ID)*Var_old(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_y(domain, VarY_BC)
 
@@ -122,6 +133,8 @@
                     end if
                 end do
 
+
+
                 ! z-component of equation
                 Var_old = Var%z
                 Eqn%counter(3) = 0
@@ -129,9 +142,14 @@
                     Eqn%counter(3) = Eqn%counter(3) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%z(glob_index(ID)) = (1.0/Eqn%z%aP(ID))*(Eqn%z%B(ID)  - Eqn%z%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%z%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%z%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%z%aW(ID)*Var_old(glob_index(ID)-1) - Eqn%z%aS(ID)*Var_old(glob_index(ID)-x%NumberNodes) - Eqn%z%aB(ID)*Var_old(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_z(domain, VarZ_BC)
 
@@ -167,9 +185,14 @@
                     Eqn%counter(1) = Eqn%counter(1) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%x(glob_index(ID)) = (1.0/Eqn%x%aP(ID))*(Eqn%x%B(ID)  - Eqn%x%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%x%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%x%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%x%aW(ID)*Var%x(glob_index(ID)-1) - Eqn%x%aS(ID)*Var%x(glob_index(ID)-x%NumberNodes) - Eqn%x%aB(ID)*Var%x(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_x(domain, VarX_BC)
 
@@ -192,9 +215,14 @@
                     Eqn%counter(2) = Eqn%counter(2) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%y(glob_index(ID)) = (1.0/Eqn%y%aP(ID))*(Eqn%y%B(ID)  - Eqn%y%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%y%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%y%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%y%aW(ID)*Var%y(glob_index(ID)-1) - Eqn%y%aS(ID)*Var%y(glob_index(ID)-x%NumberNodes) - Eqn%y%aB(ID)*Var%y(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_y(domain, VarY_BC)
 
@@ -217,9 +245,14 @@
                     Eqn%counter(3) = Eqn%counter(3) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%z(glob_index(ID)) = (1.0/Eqn%z%aP(ID))*(Eqn%z%B(ID)  - Eqn%z%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%z%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%z%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%z%aW(ID)*Var%z(glob_index(ID)-1) - Eqn%z%aS(ID)*Var%z(glob_index(ID)-x%NumberNodes) - Eqn%z%aB(ID)*Var%z(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_z(domain, VarZ_BC)
 
@@ -255,9 +288,14 @@
                     Eqn%counter(1) = Eqn%counter(1) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%x(glob_index(ID)) = (1.0-r)*Var%x(glob_index(ID)) + r*(1.0/Eqn%x%aP(ID))*(Eqn%x%B(ID)  - Eqn%x%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%x%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%x%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%x%aW(ID)*Var%x(glob_index(ID)-1) - Eqn%x%aS(ID)*Var%x(glob_index(ID)-x%NumberNodes) - Eqn%x%aB(ID)*Var%x(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_x(domain, VarX_BC)
 
@@ -280,9 +318,14 @@
                     Eqn%counter(2) = Eqn%counter(2) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%y(glob_index(ID)) = (1.0-r)*Var%y(glob_index(ID)) + r*(1.0/Eqn%y%aP(ID))*(Eqn%y%B(ID)  - Eqn%y%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%y%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%y%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%y%aW(ID)*Var%y(glob_index(ID)-1) - Eqn%y%aS(ID)*Var%y(glob_index(ID)-x%NumberNodes) - Eqn%y%aB(ID)*Var%y(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_y(domain, VarY_BC)
 
@@ -305,9 +348,14 @@
                     Eqn%counter(3) = Eqn%counter(3) + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%z(glob_index(ID)) = (1.0-r)*Var%z(glob_index(ID)) + r*(1.0/Eqn%z%aP(ID))*(Eqn%z%B(ID)  - Eqn%z%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%z%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%z%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%z%aW(ID)*Var%z(glob_index(ID)-1) - Eqn%z%aS(ID)*Var%z(glob_index(ID)-x%NumberNodes) - Eqn%z%aB(ID)*Var%z(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes))
                     end do
+                    !$omp end do
+                    !$omp end parallel 
+
                     ! Adjust boundary conditions
                     call Var%BC_Adjust_z(domain, VarZ_BC)
 

@@ -7,7 +7,7 @@ from numpy import array
 import sys 
 
 # --------------------------------------------------------------------------
-# Plots
+# Plots Grid
 # --------------------------------------------------------------------------
 
 # Clear Console (only when executed with Spyder IDE)
@@ -55,58 +55,57 @@ def obtain_variable(filename, var_name, var_type):
     f.close()
     return var;
 
+# Read variables from info file
+flow_2D = obtain_variable('.mesh_info','flow_2D','string')
+
 # Load Data
+
 x_nodes = readData('x_nodes.csv')
 y_nodes = readData('y_nodes.csv')
-z_nodes = readData('z_nodes.csv')
 x_faces = readData('x_faces.csv')
 y_faces = readData('y_faces.csv')
-z_faces = readData('z_faces.csv')
 
+if flow_2D == 'false':
+    z_nodes = readData('z_nodes.csv')
+    z_faces = readData('z_faces.csv')
 
 # Grid Plot - Cross Section
 fig = plt.figure(tight_layout='true')
 ax1 = fig.add_subplot(1, 1, 1,  aspect='equal')
-
 ax1.spines['right'].set_visible(False)
 ax1.spines['top'].set_visible(False)
 ax1.spines['left'].set_visible(False)
 ax1.spines['bottom'].set_visible(False)
-
 for i in range(0, len(y_faces)):
     plt.plot(x_faces, y_faces[i]*np.ones(len(x_faces)), 'k-', linewidth=0.1)
-    
 for i in range(0, len(x_faces)):
     plt.plot(x_faces[i]*np.ones(len(y_faces)), y_faces, 'k-', linewidth=0.1)
-
 plt.xticks(np.arange(min(x_faces), max(x_faces)+0.1, 0.5))
 plt.yticks(np.arange(min(y_faces), max(y_faces)+0.1, 0.5))
-plt.title('Grid - Cross Section', **font_title)
 plt.xlabel('x', **font_labels)
 plt.ylabel('y', **font_labels)
-
+if flow_2D == 'false':
+    plt.title('Grid - Cross Section', **font_title)
+else:
+    plt.title('Grid', **font_title)
 
 # Grid Plot - Axial Plane
-fig = plt.figure(tight_layout='true')
-ax1 = fig.add_subplot(1, 1, 1,  aspect='equal')
-
-ax1.spines['right'].set_visible(False)
-ax1.spines['top'].set_visible(False)
-ax1.spines['left'].set_visible(False)
-ax1.spines['bottom'].set_visible(False)
-
-for i in range(0, len(y_faces)):
-    plt.plot(z_faces, y_faces[i]*np.ones(len(z_faces)), 'k-', linewidth=0.1)
-    
-for i in range(0, len(z_faces)):
-    plt.plot(z_faces[i]*np.ones(len(y_faces)), y_faces, 'k-', linewidth=0.1)
-
-plt.xticks(np.arange(min(z_faces), max(z_faces)+0.1, 0.5))
-plt.yticks(np.arange(min(y_faces), max(y_faces)+0.1, 0.5))
-plt.title('Grid - Axial', **font_title)
-plt.xlabel('z', **font_labels)
-plt.ylabel('y', **font_labels)
-
+if flow_2D == 'false':
+    fig = plt.figure(tight_layout='true')
+    ax1 = fig.add_subplot(1, 1, 1,  aspect='equal')
+    ax1.spines['right'].set_visible(False)
+    ax1.spines['top'].set_visible(False)
+    ax1.spines['left'].set_visible(False)
+    ax1.spines['bottom'].set_visible(False)
+    for i in range(0, len(y_faces)):
+        plt.plot(z_faces, y_faces[i]*np.ones(len(z_faces)), 'k-', linewidth=0.1)
+    for i in range(0, len(z_faces)):
+        plt.plot(z_faces[i]*np.ones(len(y_faces)), y_faces, 'k-', linewidth=0.1)
+    plt.xticks(np.arange(min(z_faces), max(z_faces)+0.1, 0.5))
+    plt.yticks(np.arange(min(y_faces), max(y_faces)+0.1, 0.5))
+    plt.title('Grid - Axial', **font_title)
+    plt.xlabel('z', **font_labels)
+    plt.ylabel('y', **font_labels)
 
 
 plt.show()

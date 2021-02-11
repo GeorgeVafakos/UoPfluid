@@ -45,7 +45,7 @@
             integer, allocatable, dimension(:)    :: glob_index
             integer, allocatable, dimension(:)    :: nodes_inner, nodes_T, nodes_N, nodes_E, nodes_P, nodes_W, nodes_S, nodes_B
             integer k_boole, NumberBoundaries
-            logical boundary_node, flow _2D
+            logical boundary_node, flow_2D
 
             ! Read input variables
             character(len=20) :: advection_scheme
@@ -77,5 +77,7 @@
             integer print_results, print_to_screen
             integer :: unit = 10
             real*8 :: g_value = 9.81
-            
+            integer num_threads
+
+
         end module

@@ -180,6 +180,7 @@
         call system("rm -rf ../mesh")
         call system("mkdir -p ../mesh")
         call chdir('../mesh')
+        call mesh_info()
 
         ! Print nodes and faces
         call csvwrite('x_nodes.csv', x%nodes)

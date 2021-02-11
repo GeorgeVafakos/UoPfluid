@@ -13,8 +13,11 @@ To install the source code in your local system, browse to the desired directory
 ```bash
 $ git clone https://github.com/GeorgeVafakos/UoPfluid.git
 ```
-The `UoPfluid` code needs the `GNU gfortran` compiler and the `matplotlib` python library. The `matplotlib` library can be installed by the `anaconda` package.
+The `UoPfluid` code needs the `GNU gfortran` compiler and the `matplotlib` python library. If the `matplotlib` library isn't already isntalled in the system you can install it by the commands
 
+```bash
+$ sudo apt-get install python3-matplotlib
+```
 
 ## Troubleshooting
 

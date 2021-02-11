@@ -131,6 +131,7 @@
                 if (advection_scheme/='upwind' .AND. advection_scheme/='CD' .AND. advection_scheme/='none') stop 'Error: Availiable advection schemes: upwind, CD or none'
             end if
 
+            if (line=='num_threads')                read(unit,*) num_threads
             if (line=='print_results')              read(unit,*) print_results
             if (line=='print_to_screen')            read(unit,*) print_to_screen
             if (line=='start')                      read(unit,*) start

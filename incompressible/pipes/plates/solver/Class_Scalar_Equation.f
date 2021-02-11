@@ -20,6 +20,7 @@
         ! 
 
         module Class_Scalar_Equation
+            use omp_lib
             use global_variables
             use Class_Geometry
             use Class_Scalar_Variable
@@ -67,9 +68,13 @@
                     Eqn%counter = Eqn%counter + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%field(glob_index(ID)) = (1.0/Eqn%aP(ID))*(Eqn%B(ID) - Eqn%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%aW(ID)*Var_old(glob_index(ID)-1)  - Eqn%aS(ID)*Var_old(glob_index(ID)-x%NumberNodes) - Eqn%aB(ID)*Var_old(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes) )
                     end do
+                    !$omp end do
+                    !$omp end parallel
 
                     ! Adjust boundary conditions
                     call Var%BC_Adjust(domain, Var_BC)
@@ -103,9 +108,13 @@
                     Eqn%counter = Eqn%counter + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%field(glob_index(ID)) = (1.0/Eqn%aP(ID))*(Eqn%B(ID) - Eqn%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%aW(ID)*Var%field(glob_index(ID)-1)  - Eqn%aS(ID)*Var%field(glob_index(ID)-x%NumberNodes) - Eqn%aB(ID)*Var%field(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes) )
                     end do
+                    !$omp end do
+                    !$omp end parallel
 
                     ! Adjust boundary conditions
                     call Var%BC_Adjust(domain, Var_BC)
@@ -139,9 +148,13 @@
                     Eqn%counter = Eqn%counter + 1
 
                     ! Calculate the internal field
+                    !$omp parallel 
+                    !$omp do
                     do ID = N%cell_beg, N%cell_end
                         Var%field(glob_index(ID)) = (1.0-r)*Var%field(glob_index(ID)) + r*(1.0/Eqn%aP(ID))*(Eqn%B(ID) - Eqn%aT(ID)*Var_old(glob_index(ID)+k_boole*x%NumberNodes*y%NumberNodes) - Eqn%aN(ID)*Var_old(glob_index(ID)+x%NumberNodes) - Eqn%aE(ID)*Var_old(glob_index(ID)+1) - Eqn%aW(ID)*Var%field(glob_index(ID)-1)  - Eqn%aS(ID)*Var%field(glob_index(ID)-x%NumberNodes) - Eqn%aB(ID)*Var%field(glob_index(ID)-k_boole*x%NumberNodes*y%NumberNodes) )
                     end do
+                    !$omp end do
+                    !$omp end parallel
 
                     ! Adjust boundary conditions
                     call Var%BC_Adjust(domain, Var_BC)

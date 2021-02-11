@@ -21,12 +21,13 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
         ! Initial Conditions
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        ! Check if input file exists
+        ! Check if simulation_info file exists
         call chdir('../results')
         inquire(file = '.simulation_info', exist = file_exists)
         call chdir('../solver')
 
-
+        ! Define number of CPU threads are used for the OpenMP library
+        call omp_set_num_threads(num_threads)
 
         !------------------------------------------------------------------------------------------
         ! Define discretization scheme for each term

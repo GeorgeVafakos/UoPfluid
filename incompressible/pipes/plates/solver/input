@@ -29,16 +29,16 @@ flow_2D
 #------------------------------------------------------------------------------
 # Number of cells in x-axis
 cells_x
-31
+51
 # Number of cells in y-axis
 cells_y
-31
+51
 # Start of x-axis
 x_begin
 0.0
 # End of x-axis
 x_end
-10.0
+20.0
 # Start of y-axis
 y_begin
 -1.0
@@ -137,12 +137,15 @@ Gauss_Seidel
 #------------------------------------------------------------------------------
 # Other parameters
 #------------------------------------------------------------------------------
+# Number of CPU threads used for parallization
+num_threads
+1
 # Print results to file
 print_results
-50000
+50
 # Print results to screen
 print_to_screen
-1000
+1
 # Start from ('begining' or 'latest_time')
 start
 begining

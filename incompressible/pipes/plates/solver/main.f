@@ -24,6 +24,7 @@
 
         program main
 
+        use omp_lib
         use global_variables
         use Class_Advection
         use Class_Axis
@@ -66,14 +67,14 @@
         call print_initial_conditions()
 
         ! Initalize CPU timer
-        call cpu_time(cputime_start)
+        cputime_start = omp_get_wtime()
 
         do
             ! Time step starts
             Time = Time + Dt
             Iter_count = Iter_count + 1
 
-            ! Solve diffusion equation
+            ! Solve Navier-Stokes equation
             call NS_eqn%solve(domain, V, Vx_BC, Vy_BC, Vz_BC, 100, 1.0d-6, 1.0d-6, 1.0d-6, 1.0d-12)
 
             ! Create A matrix
@@ -121,8 +122,7 @@
             end if
 
             ! Calculate elapsed CPU time
-            call cpu_time(cputime_finish)
-            time_cpu = cputime_finish - cputime_start
+            time_cpu = omp_get_wtime() - cputime_start
 
             ! Print to screen
             if (mod(Iter_count,print_to_screen)==0) then
@@ -133,11 +133,11 @@
                 print '(A,A21,ES10.2,A16,I9)', 'Velocity: z-axis', 'Error w =', V%e(3), 'Loops =', NS_eqn%counter(3)
                 end if
                 print '(A,A29,ES10.2,A16,I9,A16,ES9.2)', 'Pressure', 'Error p =', p%e, 'PISO Loops =', PISO_counter, 'Div_Err = ', V%mean_div_error
-                print '(A,F10.5,A4,/)', 'CPU time =',time_cpu,'sec'
+                print '(A,F15.5,A4,/)', 'CPU time =',time_cpu,'sec'
             end if
 
             ! Start elapsed cpu time for the next time step
-            call cpu_time(cputime_start)
+            cputime_start = omp_get_wtime()
 
             ! Check if fully developed flow
             if (V%e(1)<=1.0d-6 .AND. V%e(2)<=1.0d-6 .AND. V%e(3)<=1.0d-6 .AND. p%e<=1.0d-6 .AND. NS_eqn%counter(1)<=1 .AND. NS_eqn%counter(2)<=1 .AND. NS_eqn%counter(3)<=1 .AND. PISO_counter<=1) then

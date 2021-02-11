@@ -1,7 +1,7 @@
 # Makefile
 
 CC = gfortran
-GFLAGS = -O3 -Wno-unused-parameter -ffixed-line-length-0 -c 
+GFLAGS = -O3 -ffree-form -Wno-unused-parameter -ffree-line-length-0 -c -fopenmp
 
 SOURCES_MODULES = Class_Axis.f global_variables.f Class_Geometry.f Class_Vector_Variable.f Class_Scalar_Variable.f Class_Vector_Equation.f Class_Scalar_Equation.f Class_Advection.f Class_CFL.f define_classes.f
 SOURCES_SUBPROGRAMS =  subprograms_default.f subprograms_case.f subprograms_print.f
@@ -49,7 +49,7 @@ execname: $(SOURCES)
 		
 	@echo -ne '$(PROGRESS) \033[1m  .............................................                                                           \033[91m[40%]\033[0m\r'
 	@sleep $(PERCENT)
-		@$(CC) $(GFLAGS) $(SOURCES_MODULES)
+		@$(CC) $(GFLAGS) $(SOURCES_MODULES) -fopenmp
 	@echo -ne '$(PROGRESS) \033[1m  ..................................................                                                      \033[91m[50%]\033[0m\r'
 	@sleep $(PERCENT)
 		@$(CC) $(GFLAGS) $(SOURCES_SUBPROGRAMS)
@@ -69,7 +69,7 @@ execname: $(SOURCES)
 	@sleep $(PERCENT)
 	@echo -ne '$(PROGRESS) \033[1m  ................................................................................                        \033[91m[80%]\033[0m\r'
 	@sleep $(PERCENT)
-		@$(CC) $(OBJECTS) -o $(EXECUTABLE)
+		@$(CC) $(OBJECTS) -o $(EXECUTABLE) -ffree-line-length-none -fopenmp
 	@echo -ne '$(PROGRESS) \033[1m  .....................................................................................                   \033[91m[80%]\033[0m\r'
 	@sleep $(PERCENT)
 	@echo -ne '$(PROGRESS) \033[1m  ..........................................................................................              \033[91m[90%]\033[0m\r'

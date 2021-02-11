@@ -394,4 +394,67 @@
                 close(unit)
             end subroutine
 
+
+            subroutine mesh_info()
+                use global_variables
+                use Class_CFL
+
+                open(unit = unit, file = '.mesh_info', status = 'replace', action = 'write')
+                    call print_UoPfluid_version_totextfile(unit)
+                    write(unit, '(A)') '#   File name:          mesh_info'
+                    write(unit, '(A)') '# '
+                    write(unit, '(A)') '#   Type:               text/hidden'
+                    write(unit, '(A)') '# '
+                    write(unit, '(A)') '#   Description:        In this file some crucial information about the mesh points are given.'
+                    write(unit, '(A)') '# '
+                    write(unit, '(A)') '# '
+                    write(unit, '(A)') 
+                    write(unit, '(A)') '#  2D or 3D flow'
+                    write(unit, '(A)') 'flow_2D'
+                    if (flow_2D .eqv. .FALSE.)  then
+                        write(unit,'(A)') 'false'
+                    else
+                        write(unit,'(A)') 'true'
+                    end if
+                    write(unit, '(A)')
+                    write(unit, '(A)') '# Geometric info'
+                    write(unit, '(A)') 'x_begin'
+                    write(dir_name,'(F18.1)') x_begin
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    write(unit, '(A)') 'x_end'
+                    write(dir_name,'(F18.1)') x_end
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    write(unit, '(A)') 'y_begin'
+                    write(dir_name,'(F18.1)') y_begin
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    write(unit, '(A)') 'y_end'
+                    write(dir_name,'(F18.1)') y_end
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    if (flow_2D .eqv. .FALSE.)  then
+                        write(unit, '(A)') 'z_begin'
+                        write(dir_name,'(F18.1)') z_begin
+                        write(unit, '(A)') trim(adjustl(dir_name))
+                        write(unit, '(A)') 'z_end'
+                        write(dir_name,'(F18.1)') z_end
+                        write(unit, '(A)') trim(adjustl(dir_name))
+                    end if
+                    write(unit, '(A)') 'TotalCells'
+                    write(dir_name,'(I10)') TotalCells
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    write(unit, '(A)') 'TotalNodes'
+                    write(dir_name,'(I10)') TotalNodes
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    write(unit, '(A)') 'TotalFaces'
+                    write(dir_name,'(I10)') TotalFaces
+                    write(unit, '(A)') trim(adjustl(dir_name))
+                    write(unit, '(A)')
+                    write(unit, '(A)') '#------------------------------------------------------------------------------'
+                    write(unit, '(A)') '# End of the file (the next line is necessary)'
+                    write(unit, '(A)') 'end'
+                    write(unit, '(A)') '#------------------------------------------------------------------------------'
+                    write(unit, '(A)')
+                close(unit)
+            end subroutine
+
+
             end module
