@@ -1,7 +1,7 @@
 # Makefile
 
 CC = gfortran
-GFLAGS = -O3 -ffree-form -Wno-unused-parameter -ffree-line-length-0 -c -fopenmp
+GFLAGS = -O3 -ffree-form -Wno-unused-parameter -ffree-line-length-0 -fdefault-double-8 -fdefault-real-8 -c -fopenmp
 
 SOURCES_MODULES = Class_Axis.f global_variables.f Class_Geometry.f Class_Vector_Variable.f Class_Scalar_Variable.f Class_Vector_Equation.f Class_Scalar_Equation.f Class_Advection.f Class_CFL.f define_classes.f
 SOURCES_SUBPROGRAMS =  subprograms_default.f subprograms_case.f subprograms_print.f

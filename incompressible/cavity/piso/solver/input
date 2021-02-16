@@ -32,7 +32,7 @@ cells_x
 90
 # Number of cells in y-axis
 cells_y
-30
+90
 # Start of x-axis
 x_begin
 0.0
@@ -89,15 +89,15 @@ Co
 #------------------------------------------------------------------------------
 # Inlet
 V_leftWall
+no_slip
+# Outlet
+V_rightWall
+no_slip
+# Upper wall
+V_topWall
 fixed
 1.0
 0.0
-# Outlet
-V_rightWall
-zero_gradient
-# Upper wall
-V_topWall
-no_slip
 # Bottom wall
 V_botWall
 no_slip

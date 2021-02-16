@@ -27,7 +27,7 @@
             type :: boundary
                 integer, allocatable, dimension(:)  :: nodes_bound, cells_bound, cells_inner
                 integer, allocatable, dimension(:)  :: nodes_next1, nodes_next2
-                real*8,  allocatable, dimension(:)  :: nodes_dist1, nodes_dist2
+                real,  allocatable, dimension(:)  :: nodes_dist1, nodes_dist2
             end type
 
             type :: duct

@@ -34,10 +34,10 @@
             end type
 
             type, extends (axis) :: cartesian_axis
-                real*8 begin, end, length, stretching_point, perc_cells_Left
+                real begin, end, length, stretching_point, perc_cells_Left
                 integer NumberFaces, face_beg, face_end, in_end, in_beg
-                real*8, allocatable, dimension(:)   :: faces, nodes
-                real*8  P, Q, interior_point, mhd_Ha, mhd_LayerPoints
+                real, allocatable, dimension(:)   :: faces, nodes
+                real  P, Q, interior_point, mhd_Ha, mhd_LayerPoints
             end type cartesian_axis
 
             type, extends (axis) :: global_axis
@@ -49,7 +49,7 @@
             subroutine define_axis_index(ax, cells, ax_begin, ax_end)
                 class (axis) :: ax
                 integer ::  cells
-                real*8  :: ax_begin, ax_end
+                real  :: ax_begin, ax_end
 
                 ax%NumberCells = cells
 
@@ -119,8 +119,8 @@
             subroutine one_way_stretch(ax)
                 class (axis) :: ax
                 integer i
-                real*8  n1, n2
-                real*8, allocatable, dimension(:)  :: s, n
+                real  n1, n2
+                real, allocatable, dimension(:)  :: s, n
 
                 select type (ax)
                     class is (cartesian_axis)
@@ -141,8 +141,8 @@
             subroutine two_way_stretch(ax)
                 class (axis) :: ax
                 integer i
-                real*8  n1, n2
-                real*8, allocatable, dimension(:)  :: s, n
+                real  n1, n2
+                real, allocatable, dimension(:)  :: s, n
 
                 select type (ax)
                     class is (cartesian_axis)
@@ -162,8 +162,8 @@
             subroutine interior_point_stretch(ax)
                 class (axis) :: ax
                 integer i
-                real*8  n1, b
-                real*8, allocatable, dimension(:)  :: s, n
+                real  n1, b
+                real, allocatable, dimension(:)  :: s, n
 
                 select type (ax)
                     class is (cartesian_axis)

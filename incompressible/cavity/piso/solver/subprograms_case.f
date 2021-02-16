@@ -156,7 +156,7 @@
             subroutine calculate_residual_arrays()
                 use global_variables
                 use define_classes
-                real*8, allocatable, dimension(:)   :: temp_err_Vx, temp_err_Vy, temp_err_Vz, temp_err_p
+                real, allocatable, dimension(:)   :: temp_err_Vx, temp_err_Vy, temp_err_Vz, temp_err_p
                 integer, allocatable, dimension(:)  :: temp_iterations
 
                 allocate(temp_iterations(Iter_count), temp_err_Vx(Iter_count), temp_err_Vy(Iter_count), temp_err_Vz(Iter_count), temp_err_p(Iter_count))
@@ -185,18 +185,41 @@
                 use subprograms_default
 
                 ! Chalacteristic Velocity
-                if (flow_2D .eqv. .FALSE.)  then
-                    if (V%typeBC(inlet)=='custom_inlet')  then
-                        V_char = integrate(convert1Dto2D(V%z(1:x%NumberNodes*y%NumberNodes),x%NumberNodes,y%NumberNodes), x%nodes, y%nodes)/(x%Length*y%Length)
-                    else
-                        V_char = Vz_BC(inlet)%characteristic_valueBC
-                    end if
-                else
-                    V_char = Vx_BC(inlet)%characteristic_valueBC
-                end if
+                ! if (flow_2D .eqv. .FALSE.)  then
+                !     if (V%typeBC(inlet)=='custom_inlet')  then
+                !         V_char = integrate(convert1Dto2D(V%z(1:x%NumberNodes*y%NumberNodes),x%NumberNodes,y%NumberNodes), x%nodes, y%nodes)/(x%Length*y%Length)
+                !     else
+                !         V_char = Vz_BC(inlet)%characteristic_valueBC
+                !     end if
+                ! else
+                !     V_char = Vx_BC(topWall)%characteristic_valueBC
+                ! end if
 
-                Re = V_char*(y%Length/2.0)/nu
+                V_char = Vx_BC(topWall)%characteristic_valueBC
 
+                Re = V_char*(y%Length)/nu
+
+            end subroutine
+
+
+            subroutine locate_bottom_vortex()
+                use global_variables
+                use define_classes
+                use Class_Vector_Variable
+                use subprograms_default
+
+                real, dimension(x%NumberNodes) :: mx, my
+
+                mx = 0
+                my = 0
+                mx(2:x%NumberNodes-1) = V%x(domain%boundary(botWall)%nodes_next1)
+                my(2:x%NumberNodes-1) = V%y(domain%boundary(botWall)%nodes_next1)
+
+                open(unit = unit, file = 'V_bottom.csv', status = 'replace', action = 'write')
+                do i = 1, x%NumberNodes
+                    write(unit,'(F14.8,A1,F14.8,A1,F14.8)') x%nodes(i), ',', mx(i), ',', my(i)
+                end do
+                close(unit)
             end subroutine
 
         end module

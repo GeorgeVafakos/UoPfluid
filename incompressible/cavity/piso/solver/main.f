@@ -119,6 +119,7 @@
             if (mod(Iter_count,print_results)==0) then
                 call update_sim_info()
                 call print_sim_results()
+                call locate_bottom_vortex()
             end if
 
             ! Calculate elapsed CPU time
@@ -143,6 +144,7 @@
             if (V%e(1)<=1.0d-6 .AND. V%e(2)<=1.0d-6 .AND. V%e(3)<=1.0d-6 .AND. p%e<=1.0d-6 .AND. NS_eqn%counter(1)<=1 .AND. NS_eqn%counter(2)<=1 .AND. NS_eqn%counter(3)<=1 .AND. PISO_counter<=1) then
                 print *, 'Fully developed flow'
                 call print_sim_results_final()
+                call locate_bottom_vortex()
                 call update_sim_info()
                 exit
             else

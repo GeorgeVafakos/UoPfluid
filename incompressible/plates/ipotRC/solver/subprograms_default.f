@@ -80,8 +80,8 @@
 
             subroutine meshgrid2D(X, Y, x_vec, y_vec)
                 integer i,j
-                real*8, intent(in) , dimension(:)   :: x_vec, y_vec
-                real*8, intent(out), dimension(:,:) :: X, Y
+                real, intent(in) , dimension(:)   :: x_vec, y_vec
+                real, intent(out), dimension(:,:) :: X, Y
 
                 X = spread(x_vec, 1, size(y_vec) )
                 Y = spread(y_vec, 2, size(x_vec) )
@@ -91,8 +91,8 @@
 
             subroutine meshgrid3D(X, Y, Z, x_vec, y_vec, z_vec)
                 integer i
-                real*8, intent(in) , dimension(:)     :: x_vec, y_vec, z_vec
-                real*8, intent(out), dimension(:,:,:) :: X, Y, Z
+                real, intent(in) , dimension(:)     :: x_vec, y_vec, z_vec
+                real, intent(out), dimension(:,:,:) :: X, Y, Z
                   
                 do i=1,size(z_vec)
                     X(:,:,i) = spread( x_vec, 2, size(y_vec) )
@@ -335,7 +335,7 @@
 
             subroutine csvread_real(filename, A)
                 integer i, n
-                real*8, dimension(:)  :: A
+                real, dimension(:)  :: A
                 integer :: unit = 10
                 character(len=*), intent(in) :: filename
 
@@ -367,7 +367,7 @@
 
             subroutine csvwrite1D_real(filename, A)
                 integer i, n
-                real*8, dimension(:)  :: A
+                real, dimension(:)  :: A
                 integer :: unit = 10
                 character(len=*), intent(in) :: filename
 
@@ -399,7 +399,7 @@
 
            subroutine csvwrite2D(filename, A)
                 integer col, row, i, j
-                real*8, dimension(:,:)  :: A
+                real, dimension(:,:)  :: A
                 integer :: unit = 10
                 character(len=*), intent(in) :: filename
 
@@ -420,7 +420,7 @@
 
             function convert2Dto1D(Ar, I_max, J_max)    result(m)
                 integer i_count, j_count, I_max, J_max
-                real*8 :: Ar(:,:), m(I_max*J_max)
+                real :: Ar(:,:), m(I_max*J_max)
 
                 do j_count = 1, J_max
                     do i_count = 1, I_max
@@ -432,7 +432,7 @@
 
             function convert1Dto2D(Ar, I_max, J_max)    result(m)
                 integer i_count, j_count, I_max, J_max
-                real*8 :: Ar(:), m(I_max,J_max)
+                real :: Ar(:), m(I_max,J_max)
 
                 do j_count = 1, J_max
                     do i_count = 1, I_max
@@ -444,7 +444,7 @@
 
             function convert3Dto1D(Ar, I_max, J_max, K_max)    result(m)
                 integer i_count, j_count, k_count, I_max, J_max, K_max
-                real*8 :: Ar(:,:,:), m(I_max*J_max*K_max)
+                real :: Ar(:,:,:), m(I_max*J_max*K_max)
 
                 do k_count = 1, K_max
                     do j_count = 1, J_max
@@ -458,7 +458,7 @@
 
             function convert1Dto3D(Ar, I_max, J_max, K_max)    result(m)
                 integer i_count, j_count, k_count, I_max, J_max, K_max
-                real*8 :: Ar(:), m(I_max,J_max,K_max)
+                real :: Ar(:), m(I_max,J_max,K_max)
 
                 do k_count = 1, K_max
                     do j_count = 1, J_max
@@ -497,7 +497,7 @@
 
 
             function obtain_variable(filename, var_name)    result(var)     
-                real*8 var
+                real var
                 character(len=*) :: filename, var_name
                 character(len=100) :: line
                 logical end_loop
@@ -518,8 +518,8 @@
 
 
             function integrate1D(u, x)    result(R)
-                real*8, dimension(:) :: u, x
-                real*8 R
+                real, dimension(:) :: u, x
+                real R
                 integer i, n
 
                 n = size(x) - 1
@@ -531,11 +531,11 @@
 
 
             function integrate2D(u, x, y)    result(R)
-                real*8, dimension(:,:) :: u
-                real*8, dimension(:)   :: x, y
-                real*8 R
+                real, dimension(:,:) :: u
+                real, dimension(:)   :: x, y
+                real R
                 integer i, j, i_end, j_end 
-                real*8 :: Ry(size(x)-1)
+                real :: Ry(size(x)-1)
 
                 i_end = size(x) - 1
                 j_end = size(y) - 1
@@ -558,8 +558,8 @@
                 use global_variables
                 use Class_Vector_Variable
 
-                real*8, dimension(:) :: var
-                real*8 :: m(TotalCells)
+                real, dimension(:) :: var
+                real :: m(TotalCells)
 
                 m = k_boole*aT_lapl*var(nodes_T)+aN_lapl*var(nodes_N)+aE_lapl*var(nodes_E)+aP_lapl*var(nodes_P)+aW_lapl*var(nodes_W)+aS_lapl*var(nodes_S)+k_boole*aB_lapl*var(nodes_B)
             end function
@@ -569,8 +569,8 @@
                 use global_variables
                 use Class_Scalar_Variable
 
-                real*8, dimension(:) :: var
-                real*8 :: m(TotalCells)
+                real, dimension(:) :: var
+                real :: m(TotalCells)
 
                 m = aE_gradx*var(nodes_E) + aP_gradx*var(nodes_P) + aW_gradx*var(nodes_W)
             end function
@@ -580,8 +580,8 @@
                 use global_variables
                 use Class_Scalar_Variable
 
-                real*8, dimension(:) :: var
-                real*8 :: m(TotalCells)
+                real, dimension(:) :: var
+                real :: m(TotalCells)
 
                 m = aN_grady*var(nodes_N) + aP_grady*var(nodes_P) + aS_grady*var(nodes_S)
             end function
@@ -591,8 +591,8 @@
                 use global_variables
                 use Class_Scalar_Variable
 
-                real*8, dimension(:) :: var
-                real*8 :: m(TotalCells)
+                real, dimension(:) :: var
+                real :: m(TotalCells)
 
                 m = aT_gradz*var(nodes_T) + aP_gradz*var(nodes_P) + aB_gradz*var(nodes_B)
             end function
@@ -603,7 +603,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: A_vect, B_vect
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = A_vect%y(Nodes_P)*B_vect%z(Nodes_P) - A_vect%z(Nodes_P)*B_vect%y(Nodes_P)
             end function
@@ -614,7 +614,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: A_vect, B_vect
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = - A_vect%x(Nodes_P)*B_vect%z(Nodes_P) + A_vect%z(Nodes_P)*B_vect%x(Nodes_P)
             end function
@@ -625,7 +625,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: A_vect, B_vect
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = A_vect%x(Nodes_P)*B_vect%y(Nodes_P) - A_vect%y(Nodes_P)*B_vect%x(Nodes_P)
             end function
@@ -636,7 +636,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: A_vect
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = grady(A_vect%z) - gradz(A_vect%y)
             end function
@@ -647,7 +647,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: A_vect
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = gradz(A_vect%x) - gradx(A_vect%z)
             end function
@@ -658,7 +658,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: A_vect
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = gradx(A_vect%y) - grady(A_vect%x)
             end function
@@ -669,7 +669,7 @@
                 use Class_Vector_Variable
 
                 type (Vector_variable) :: Var
-                real*8 :: m(TotalCells)
+                real :: m(TotalCells)
 
                 m = aE_divx*Var%x(nodes_E)+aP_divx*Var%x(nodes_P)+aW_divx*Var%x(nodes_W) + aN_divy*Var%y(nodes_N)+aP_divy*Var%y(nodes_P)+aS_divy*Var%y(nodes_S) + k_boole*(aT_divz*Var%z(nodes_T)+aP_divz*Var%z(nodes_P)+aB_divz*Var%z(nodes_B))
             end function
@@ -680,8 +680,8 @@
                 use Class_Advection
 
                 type (Advection) :: Adv
-                real*8 :: var(:) 
-                real*8 :: m(TotalCells)
+                real :: var(:) 
+                real :: m(TotalCells)
 
                 m = k_boole*Adv%aT*var(nodes_T) + Adv%aN*var(nodes_N) + Adv%aE*var(nodes_E) + Adv%aP*var(nodes_P) + Adv%aW*var(nodes_W) + Adv%aS*var(nodes_S) + k_boole*Adv%aB*var(nodes_B)
 
@@ -694,8 +694,8 @@
                 use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
 
                 type (Vector_Variable) :: Var, Var0
-                real*8 :: Error(TotalNodes)
-                real*8 res, small_num
+                real :: Error(TotalNodes)
+                real res, small_num
 
                 ! x-component error calculation
                 Error = abs((Var%x-Var0%x))/abs(Var%x)
@@ -737,8 +737,8 @@
                 use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
 
                 type (Scalar_Variable) :: Var, Var0
-                real*8 :: Error(TotalNodes)
-                real*8 res, small_num
+                real :: Error(TotalNodes)
+                real res, small_num
 
                 ! Error calculation
                 Error = abs((Var%field-Var0%field))/abs(Var%field)
@@ -758,8 +758,8 @@
                 use Class_Vector_Variable
 
                 type (Vector_Variable) :: Var
-                real*8 :: mean_val
-                real*8 :: B(TotalCells)
+                real :: mean_val
+                real :: B(TotalCells)
 
                 ! B = aE_divx*Var%x(nodes_E)+aP_divx*Var%x(nodes_P)+aW_divx*Var%x(nodes_W) + aN_divy*Var%y(nodes_N)+aP_divy*Var%y(nodes_P)+aS_divy*Var%y(nodes_S) + k_boole*(aT_divz*Var%z(nodes_T)+aP_divz*Var%z(nodes_P)+aB_divz*Var%z(nodes_B))
                 B = div(Var)
@@ -773,7 +773,7 @@
                 use Class_Geometry
 
                 type (duct) :: domain
-                real*8, dimension(:) :: Var
+                real, dimension(:) :: Var
 
                 do i = 1, domain%NumberBoundaries
                     Var(domain%boundary(i)%nodes_bound) = Var(domain%boundary(i)%nodes_next2) + ((domain%boundary(i)%nodes_dist1+domain%boundary(i)%nodes_dist2)/(domain%boundary(i)%nodes_dist2))*(Var(domain%boundary(i)%nodes_next1)-Var(domain%boundary(i)%nodes_next2))

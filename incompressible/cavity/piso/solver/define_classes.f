@@ -50,7 +50,7 @@
             type (Vector_Variable) :: V, V_old, H
             type (Vector_Variable_BC), allocatable, dimension(:) :: Vx_BC, Vy_BC, Vz_BC
             type (Scalar_Variable) :: p, p_old
-            type (Scalar_Variable_BC), allocatable, dimension(:) ::s p_BC
+            type (Scalar_Variable_BC), allocatable, dimension(:) :: p_BC
 
             ! Define equations
             type (Vector_Equation) :: NS_eqn

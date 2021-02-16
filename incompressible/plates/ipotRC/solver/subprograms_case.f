@@ -156,7 +156,7 @@
             subroutine calculate_residual_arrays()
                 use global_variables
                 use define_classes
-                real*8, allocatable, dimension(:)   :: temp_err_Vx, temp_err_Vy, temp_err_Vz, temp_err_p
+                real, allocatable, dimension(:)   :: temp_err_Vx, temp_err_Vy, temp_err_Vz, temp_err_p
                 integer, allocatable, dimension(:)  :: temp_iterations
 
                 allocate(temp_iterations(Iter_count), temp_err_Vx(Iter_count), temp_err_Vy(Iter_count), temp_err_Vz(Iter_count), temp_err_p(Iter_count))

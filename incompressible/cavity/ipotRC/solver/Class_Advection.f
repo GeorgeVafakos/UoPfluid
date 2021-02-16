@@ -31,13 +31,13 @@
             implicit none
 
             type :: Advection
-                real*8, allocatable, dimension(:) :: aT
-                real*8, allocatable, dimension(:) :: aN
-                real*8, allocatable, dimension(:) :: aE
-                real*8, allocatable, dimension(:) :: aP
-                real*8, allocatable, dimension(:) :: aW
-                real*8, allocatable, dimension(:) :: aS
-                real*8, allocatable, dimension(:) :: aB
+                real, allocatable, dimension(:) :: aT
+                real, allocatable, dimension(:) :: aN
+                real, allocatable, dimension(:) :: aE
+                real, allocatable, dimension(:) :: aP
+                real, allocatable, dimension(:) :: aW
+                real, allocatable, dimension(:) :: aS
+                real, allocatable, dimension(:) :: aB
                 procedure(CD_scheme), pointer :: create_terms => null()
             contains
                 procedure :: allocate => allocate_advection_terms
@@ -69,7 +69,7 @@
             function interpolate_t(Interp, Var)  result(m)
                 class (Interpolate_Procedures) :: Interp
                 class (Vector_Variable) :: Var
-                real*8, dimension(TotalCells) :: m
+                real, dimension(TotalCells) :: m
 
                 m = Var%z(nodes_T)*(0.5*Dz)/dzt + Var%z(nodes_P)*(1-0.5*Dz/dzt)
 
@@ -78,7 +78,7 @@
             function interpolate_n(Interp, Var)  result(m)
                 class (Interpolate_Procedures) :: Interp
                 class (Vector_Variable) :: Var
-                real*8, dimension(TotalCells) :: m
+                real, dimension(TotalCells) :: m
 
                 m = Var%y(nodes_N)*(0.5*Dy)/dyn + Var%y(nodes_P)*(1-0.5*Dy/dyn)
 
@@ -87,7 +87,7 @@
             function interpolate_e(Interp, Var)  result(m)
                 class (Interpolate_Procedures) :: Interp
                 class (Vector_Variable) :: Var
-                real*8, dimension(TotalCells) :: m
+                real, dimension(TotalCells) :: m
 
                 m = Var%x(nodes_E)*(0.5*Dx)/dxe + Var%x(nodes_P)*(1-0.5*Dx/dxe)
 
@@ -96,7 +96,7 @@
             function interpolate_w(Interp, Var)  result(m)
                 class (Interpolate_Procedures) :: Interp
                 class (Vector_Variable) :: Var
-                real*8, dimension(TotalCells) :: m
+                real, dimension(TotalCells) :: m
 
                 m = Var%x(nodes_W)*(0.5*Dx)/dxw + Var%x(nodes_P)*(1-0.5*Dx/dxw)
 
@@ -105,7 +105,7 @@
             function interpolate_s(Interp, Var)  result(m)
                 class (Interpolate_Procedures) :: Interp
                 class (Vector_Variable) :: Var
-                real*8, dimension(TotalCells) :: m
+                real, dimension(TotalCells) :: m
 
                 m = Var%y(nodes_S)*(0.5*Dy)/dys + Var%y(nodes_P)*(1-0.5*Dy/dys)
 
@@ -114,7 +114,7 @@
             function interpolate_b(Interp, Var)  result(m)
                 class (Interpolate_Procedures) :: Interp
                 class (Vector_Variable) :: Var
-                real*8, dimension(TotalCells) :: m
+                real, dimension(TotalCells) :: m
 
                 m = Var%z(nodes_B)*(0.5*Dz)/dzb + Var%z(nodes_P)*(1-0.5*Dz/dzb)
             end function

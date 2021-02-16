@@ -29,12 +29,12 @@
 
             ! Create CFL class type
             type :: CFL_number
-                real*8, allocatable, dimension(:) :: x
-                real*8, allocatable, dimension(:) :: y
-                real*8, allocatable, dimension(:) :: z
-                real*8 :: x_max,  y_max,  z_max
-                real*8 :: x_mean, y_mean, z_mean
-                real*8 :: max, mean, fixed_value
+                real, allocatable, dimension(:) :: x
+                real, allocatable, dimension(:) :: y
+                real, allocatable, dimension(:) :: z
+                real :: x_max,  y_max,  z_max
+                real :: x_mean, y_mean, z_mean
+                real :: max, mean, fixed_value
                 procedure(calculate_CFL), pointer :: CFL_condition => null()
             contains
                 procedure :: allocate => allocate_CFL_number

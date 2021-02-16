@@ -38,7 +38,7 @@
                 use subprograms_default
                 use define_classes
 
-                real*8 :: empty(1)=0.0
+                real :: empty(1)=0.0
 
                 write(dir_name,'(I10)') Iter_count
                 call chdir('../results')
@@ -157,7 +157,7 @@
             subroutine print_screen_matrix1D_real(A)
                 implicit none
                 integer i
-                real*8, dimension(:) :: A
+                real, dimension(:) :: A
 
                 do i = 1, size(A)
                     write(*,*) A(i)

@@ -30,14 +30,14 @@
 
             ! Create equation class type
             type :: component
-                real*8, allocatable, dimension(:) :: aT
-                real*8, allocatable, dimension(:) :: aN
-                real*8, allocatable, dimension(:) :: aE
-                real*8, allocatable, dimension(:) :: aP
-                real*8, allocatable, dimension(:) :: aW
-                real*8, allocatable, dimension(:) :: aS
-                real*8, allocatable, dimension(:) :: aB
-                real*8, allocatable, dimension(:) :: B
+                real, allocatable, dimension(:) :: aT
+                real, allocatable, dimension(:) :: aN
+                real, allocatable, dimension(:) :: aE
+                real, allocatable, dimension(:) :: aP
+                real, allocatable, dimension(:) :: aW
+                real, allocatable, dimension(:) :: aS
+                real, allocatable, dimension(:) :: aB
+                real, allocatable, dimension(:) :: B
             end type
 
             type, public :: Vector_Equation
@@ -67,10 +67,10 @@
                 class (Vector_Variable) :: Var
                 class (duct) :: domain
                 class (Vector_Variable_BC), dimension(domain%NumberBoundaries) :: VarX_BC, VarY_BC, VarZ_BC
-                real*8 tol_x, tol_y, tol_z
+                real tol_x, tol_y, tol_z
                 integer max_count
-                real*8  :: Error(TotalNodes)
-                real*8  e, small_numbr
+                real  :: Error(TotalNodes)
+                real  e, small_numbr
 
                 ! x-component of equation
                 var_old = Var%x
@@ -173,10 +173,10 @@
                 class (Vector_Variable) :: Var
                 class (duct) :: domain
                 class (Vector_Variable_BC), dimension(domain%NumberBoundaries) :: VarX_BC, VarY_BC, VarZ_BC
-                real*8 tol_x, tol_y, tol_z
+                real tol_x, tol_y, tol_z
                 integer max_count
-                real*8  :: Error(TotalNodes)
-                real*8  e, small_numbr
+                real  :: Error(TotalNodes)
+                real  e, small_numbr
                 
                 ! x-component of equation
                 var_old = Var%x
@@ -276,10 +276,10 @@
                 class (Vector_Variable) :: Var
                 class (duct) :: domain
                 class (Vector_Variable_BC), dimension(domain%NumberBoundaries) :: VarX_BC, VarY_BC, VarZ_BC
-                real*8 tol_x, tol_y, tol_z
+                real tol_x, tol_y, tol_z
                 integer max_count
-                real*8  :: Error(TotalNodes)
-                real*8  e, small_numbr
+                real  :: Error(TotalNodes)
+                real  e, small_numbr
                 
                 ! x-component of equation
                 var_old = Var%x

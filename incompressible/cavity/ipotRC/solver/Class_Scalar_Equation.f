@@ -29,14 +29,14 @@
 
             ! Create equation class type
             type :: Scalar_Equation
-                real*8, allocatable, dimension(:) :: aT
-                real*8, allocatable, dimension(:) :: aN
-                real*8, allocatable, dimension(:) :: aE
-                real*8, allocatable, dimension(:) :: aP
-                real*8, allocatable, dimension(:) :: aW
-                real*8, allocatable, dimension(:) :: aS
-                real*8, allocatable, dimension(:) :: aB
-                real*8, allocatable, dimension(:) :: B
+                real, allocatable, dimension(:) :: aT
+                real, allocatable, dimension(:) :: aN
+                real, allocatable, dimension(:) :: aE
+                real, allocatable, dimension(:) :: aP
+                real, allocatable, dimension(:) :: aW
+                real, allocatable, dimension(:) :: aS
+                real, allocatable, dimension(:) :: aB
+                real, allocatable, dimension(:) :: B
                 integer counter
                 procedure(jacobi_scalar), pointer :: solve => null()
             contains
@@ -59,8 +59,8 @@
                 class (duct) :: domain
                 class (Scalar_Variable_BC), dimension(domain%NumberBoundaries) :: Var_BC
                 integer max_count
-                real*8  :: Error(TotalNodes)
-                real*8  e, tol, small_numbr
+                real  :: Error(TotalNodes)
+                real  e, tol, small_numbr
 
                 var_old = Var%field
                 Eqn%counter = 0
@@ -99,8 +99,8 @@
                 class (duct) :: domain
                 class (Scalar_Variable_BC), dimension(domain%NumberBoundaries) :: Var_BC
                 integer max_count
-                real*8  :: Error(TotalNodes)
-                real*8  e, tol, small_numbr
+                real  :: Error(TotalNodes)
+                real  e, tol, small_numbr
 
                 var_old = Var%field
                 Eqn%counter = 0
@@ -139,8 +139,8 @@
                 class (duct) :: domain
                 class (Scalar_Variable_BC), dimension(domain%NumberBoundaries) :: Var_BC
                 integer max_count
-                real*8  :: Error(TotalNodes)
-                real*8  e, tol, small_numbr
+                real  :: Error(TotalNodes)
+                real  e, tol, small_numbr
 
                 var_old = Var%field
                 Eqn%counter = 0
