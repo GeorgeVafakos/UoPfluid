@@ -11,7 +11,7 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
         ! 
         ! 
-        !   Solver:             plates
+        !   Solver:             cavity
         ! 
         !   Discription:        This is an incompressible solver for the solution of the Navier-Stokes equation, using the PISO algorithm.
         ! 
@@ -140,7 +140,7 @@
             cputime_start = omp_get_wtime()
 
             ! Check if fully developed flow
-            if (V%e(1)<=1.0d-6 .AND. V%e(2)<=1.0d-6 .AND. V%e(3)<=1.0d-6 .AND. p%e<=1.0d-6 .AND. NS_eqn%counter(1)<=1 .AND. NS_eqn%counter(2)<=1 .AND. NS_eqn%counter(3)<=1 .AND. PISO_counter<=1) then
+            if (V%e(1)<=1.0d-6 .AND. V%e(2)<=1.0d-6 .AND. V%e(3)<=1.0d-6 .AND. p%e<=1.0d-5 .AND. NS_eqn%counter(1)<=1 .AND. NS_eqn%counter(2)<=1 .AND. NS_eqn%counter(3)<=1 .AND. PISO_counter<=1) then
                 print *, 'Fully developed flow'
                 call print_sim_results_final()
                 call update_sim_info()

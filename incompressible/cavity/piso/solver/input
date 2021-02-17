@@ -29,10 +29,10 @@ flow_2D
 #------------------------------------------------------------------------------
 # Number of cells in x-axis
 cells_x
-200
+130
 # Number of cells in y-axis
 cells_y
-200
+130
 # Start of x-axis
 x_begin
 0.0
@@ -87,13 +87,13 @@ Co
 #------------------------------------------------------------------------------
 # Velocity boundary conditions
 #------------------------------------------------------------------------------
-# Inlet
+# Left wall
 V_leftWall
 no_slip
-# Outlet
+# Right Wall
 V_rightWall
 no_slip
-# Upper wall
+# Top wall
 V_topWall
 fixed
 1.0
@@ -108,13 +108,13 @@ fixed_zero
 #------------------------------------------------------------------------------
 # Pressure boundary conditions
 #------------------------------------------------------------------------------
-# Inlet
-p_inlet
+# Left wall
+p_leftWall
 zero_gradient
-# Outlet
-p_outlet
+# Right wall
+p_rightWall
 zero_gradient
-# Upper wall
+# Top wall
 p_topWall
 zero_gradient
 # Bottom wall
