@@ -37,6 +37,7 @@
                 use global_variables
                 use subprograms_default
                 use define_classes
+                use Class_Vector_Variable
 
                 real :: empty(1)=0.0
 
@@ -96,6 +97,7 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
+                call write_bottom_vortex_data()
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', Err_Vx)
@@ -135,6 +137,7 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
+                call write_bottom_vortex_data()
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', Err_Vx)
