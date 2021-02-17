@@ -202,7 +202,7 @@
             end subroutine
 
 
-            subroutine locate_bottom_vortex()
+            subroutine write_bottom_vortex_data()
                 use global_variables
                 use define_classes
                 use Class_Vector_Variable

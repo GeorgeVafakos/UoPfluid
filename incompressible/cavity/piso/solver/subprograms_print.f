@@ -37,7 +37,6 @@
                 use global_variables
                 use subprograms_default
                 use define_classes
-                use Class_Vector_Variable
 
                 real :: empty(1)=0.0
 
@@ -81,6 +80,7 @@
             subroutine print_sim_results()
                 use global_variables
                 use subprograms_default
+                use subprograms_case
                 use define_classes
 
                 write(dir_name,'(I10)') Iter_count
@@ -122,6 +122,7 @@
             subroutine print_sim_results_final()
                 use global_variables
                 use subprograms_default
+                use subprograms_case
                 use define_classes
 
                 call execute_command_line ('mkdir -p ../results/final')
