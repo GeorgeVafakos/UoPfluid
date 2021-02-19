@@ -3,7 +3,7 @@
 A Computational Fluid Dynamic multi-solver code, that is targeted in the solution of fluid dynamics, heat transfer and magnetohydrodynamics equations of motion. The code is written in object-oriented Fortran, while the flow is visualized with Python scripts, using the matplotlib tool. CPU parallelization is enabled with the OpenMP protocol.
 
 
-## Solvers and Capabilities
+## Solvers and Capabilitiesssss
 
 
 ## Installation
