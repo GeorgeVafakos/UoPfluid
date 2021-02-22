@@ -29,10 +29,10 @@ flow_2D
 #------------------------------------------------------------------------------
 # Number of cells in x-axis
 cells_x
-130
+60
 # Number of cells in y-axis
 cells_y
-130
+60
 # Start of x-axis
 x_begin
 0.0
@@ -49,12 +49,12 @@ y_end
 X_stretch
 two_way_stretch
 0.1
-2.0
+3.0
 # y-axis stretch type (see read_input.f)
 Y_stretch
 two_way_stretch
 0.1
-2.0
+3.0
 
 #------------------------------------------------------------------------------
 # Boundary Names
@@ -76,7 +76,7 @@ advection_scheme
 CD
 # Kinematic viscosity
 nu
-1.0d-2
+2.0d-4
 # Density
 rho
 1.0
@@ -145,7 +145,7 @@ print_results
 5000
 # Print results to screen
 print_to_screen
-1
+100
 # Start from ('begining' or 'latest_time')
 start
 begining
