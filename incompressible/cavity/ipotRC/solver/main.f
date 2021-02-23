@@ -11,11 +11,11 @@
         !-----------------------------------------------------------------------------------------------------------------------------------------------------------
         ! 
         ! 
-        !   Solver:             plates
+        !   Solver:             cavity
         ! 
-        !   Discription:        This is an incompressible solver for the solution of the Navier-Stokes equation, using the PISO algorithm.
+        !   Discription:        This is an incompressible solver for the solution of the Navier-Stokes equation, using the IPOT algorithm, with the Rhie-Chow extrap.
         ! 
-        !   Geometry:           Internal pipe flow. 2D parallel plates.
+        !   Geometry:           Lid-driven cavity 2D incompressible flow.
         ! 
         !   Algorithms:         Jacobi, Gauss-Seidel, SOR
         !                       
@@ -89,8 +89,6 @@
                 call create_H()
 
                 ! Calculate pressure
-                ! call Pres_eqn%solve(domain, p, p_BC, 1, 1.0d-6, 1.0d-12)
-                ! p%field(nodes_P) = p%field(nodes_P) - r_ipot*nu*(div(Η) - laplacian(p%field)/A)
                 p%field(nodes_P) = p%field(nodes_P) - r_ipot*nu*(div(H) - (Dx*Dy*(1.0-k_boole+k_boole*Dz))*laplacian(p%field)/A)
                 call p%BC_Adjust(domain, p_BC)
 

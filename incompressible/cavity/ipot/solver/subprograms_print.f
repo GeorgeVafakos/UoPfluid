@@ -80,6 +80,7 @@
             subroutine print_sim_results()
                 use global_variables
                 use subprograms_default
+                use subprograms_case
                 use define_classes
 
                 write(dir_name,'(I10)') Iter_count
@@ -96,6 +97,7 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
+                call write_bottom_vortex_data()
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', Err_Vx)
@@ -120,6 +122,7 @@
             subroutine print_sim_results_final()
                 use global_variables
                 use subprograms_default
+                use subprograms_case
                 use define_classes
 
                 call execute_command_line ('mkdir -p ../results/final')
@@ -135,6 +138,7 @@
                 call csvwrite('u.csv',V%x)
                 call csvwrite('v.csv',V%y)
                 call csvwrite('p.csv',p%field)
+                call write_bottom_vortex_data()
 
                 ! Print residuals
                 call csvwrite('Err_u.csv', Err_Vx)
@@ -269,8 +273,9 @@
                 use global_variables
 
                 call print_UoPfluid_version_toscreen()
-                print '(A)',                 ' |    Solver:         mhd_pipe'
+                print '(A)',                 ' |    Case:           Cavity'
                 print '(A)',                 ' | '
+                print '(A)',                 ' |    Solver:         IPOT'
                 print '(A)',                 ' | '
                 print '(A)',                 ' |    Classes Created .................................... [OK]'
                 print '(A)',                 ' | '
@@ -287,7 +292,9 @@
                 print '(A,I12,A22,E12.1)',    ' |    Total Faces:', TotalFaces, 'rho =', rho
                 print '(A,I15,A22,E12.1)',    ' |    Cells x =', cells_x, 'Dt =', Dt
                 print '(A,I15,A22,E12.1)',    ' |    Cells y =', cells_y
+                if (flow_2D .eqv. .FALSE.)  then
                 print '(A,I15,A22,E12.1)',    ' |    Cells z =', k_boole*cells_z
+                end if
                 print '(A,F20.4,A22,E12.1)',   ' |    Px =', x%P
                 print '(A,F20.4,A22,E12.1)',   ' |    Qx =', x%Q
                 print '(A,F20.4,A22,E12.1)',   ' |    Py =', y%P
@@ -296,12 +303,6 @@
                 print '(A,F20.4,A22,E12.1)',   ' |    Pz =', k_boole*z%P
                 print '(A,F20.4,A22,F12.1)',   ' |    Qz =', k_boole*z%Q
                 end if
-                ! write(*,'(A,I10)')             ' |    Newton-Raphson Iter:', NewtRaph_Iter_y
-                ! write(*,'(A,I9)')              ' |    Hartmann Layer Cells:', NumberCells_Layer_y
-                ! write(*,'(A,I14)')             ' |    Number of nodes:', TotalNodes
-                ! write(*,'(A,I14)')             ' |    Number of cells:', TotalCells
-                ! write(*,'(A)')                 ' |'
-                ! write(*,'(A)')                 ' |'
                 write(*,*) 
                 write(*,*) 
                 write(*,*) 'Start'

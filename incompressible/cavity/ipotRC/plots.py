@@ -99,7 +99,9 @@ elif flow_2D == 'true':
     v = v.transpose()
     p = p.transpose()
 
-# Save csv data files
+# Save csv velocity profiles files
+np.savetxt('u_profile.csv', u[:,iround(u.shape[1]/2.0)-1], delimiter=',')
+np.savetxt('v_profile.csv', v[iround(v.shape[0]/2.0)-1,:], delimiter=',')
 #np.savetxt('p_drop.csv', p[iround((p.shape[0]-1)/2.0),:], delimiter=',')
 #np.savetxt('u_axial.csv', u[iround(u.shape[0]/2.0)-1,:], delimiter=',')
 #np.savetxt('u_profile.csv', u[:,iround(u.shape[1])-1], delimiter=',')

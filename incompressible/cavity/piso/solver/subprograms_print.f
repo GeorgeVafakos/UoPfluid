@@ -303,12 +303,6 @@
                 print '(A,F20.4,A22,E12.1)',   ' |    Pz =', k_boole*z%P
                 print '(A,F20.4,A22,F12.1)',   ' |    Qz =', k_boole*z%Q
                 end if
-                ! write(*,'(A,I10)')             ' |    Newton-Raphson Iter:', NewtRaph_Iter_y
-                ! write(*,'(A,I9)')              ' |    Hartmann Layer Cells:', NumberCells_Layer_y
-                ! write(*,'(A,I14)')             ' |    Number of nodes:', TotalNodes
-                ! write(*,'(A,I14)')             ' |    Number of cells:', TotalCells
-                ! write(*,'(A)')                 ' |'
-                ! write(*,'(A)')                 ' |'
                 write(*,*) 
                 write(*,*) 
                 write(*,*) 'Start'
