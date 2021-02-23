@@ -29,10 +29,10 @@ flow_2D
 #------------------------------------------------------------------------------
 # Number of cells in x-axis
 cells_x
-90
+102
 # Number of cells in y-axis
 cells_y
-30
+102
 # Start of x-axis
 x_begin
 0.0
@@ -48,13 +48,13 @@ y_end
 # x-axis stretch type (see read_input.f)
 X_stretch
 one_way_stretch
-0.2
-2.0
+0.1
+3.0
 # y-axis stretch type (see read_input.f)
 Y_stretch
 two_way_stretch
-0.2
-2.0
+0.1
+3.0
 
 #------------------------------------------------------------------------------
 # Boundary Names
@@ -73,7 +73,7 @@ backWall
 #------------------------------------------------------------------------------
 # Advective terms discretization (upwind, CD or none)
 advection_scheme
-upwind
+CD
 # Kinematic viscosity
 nu
 1.0d-2

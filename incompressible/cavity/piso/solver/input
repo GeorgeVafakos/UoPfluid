@@ -29,10 +29,10 @@ flow_2D
 #------------------------------------------------------------------------------
 # Number of cells in x-axis
 cells_x
-60
+102
 # Number of cells in y-axis
 cells_y
-60
+102
 # Start of x-axis
 x_begin
 0.0
@@ -76,7 +76,7 @@ advection_scheme
 CD
 # Kinematic viscosity
 nu
-2.0d-4
+1.0d-2
 # Density
 rho
 1.0
