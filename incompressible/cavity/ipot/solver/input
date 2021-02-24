@@ -61,8 +61,8 @@ two_way_stretch
 #------------------------------------------------------------------------------
 # Names of boundaries for the declaration of boudnary conditions
 boundary_names
-inlet
-outlet
+leftWall
+rightWall
 topWall
 botWall
 frontWall
@@ -85,18 +85,18 @@ Co
 0.6
 # IPOT relaxation factor
 r_ipot
-500.0
+50.0
 
 #------------------------------------------------------------------------------
 # Velocity boundary conditions
 #------------------------------------------------------------------------------
 # Inlet
-V_inlet
+V_leftWall
 fixed
 1.0
 0.0
 # Outlet
-V_outlet
+V_rightWall
 zero_gradient
 # Upper wall
 V_topWall
@@ -112,10 +112,10 @@ fixed_zero
 # Pressure boundary conditions
 #------------------------------------------------------------------------------
 # Inlet
-p_inlet
+p_leftWall
 zero_gradient
 # Outlet
-p_outlet
+p_rightWall
 fixed_zero
 # Upper wall
 p_topWall

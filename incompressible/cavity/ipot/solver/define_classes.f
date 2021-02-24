@@ -36,8 +36,8 @@
             type (duct) :: domain
 
             ! Name the boundaries (1,2,3,4,5,6 for left, right, top, bottom, front and back respectively)
-            integer, parameter :: inlet     = 1
-            integer, parameter :: outlet    = 2
+            integer, parameter :: leftWall     = 1
+            integer, parameter :: rightWall    = 2
             integer, parameter :: topWall   = 3
             integer, parameter :: botWall   = 4
             integer, parameter :: frontWall = 5

@@ -74,19 +74,19 @@
         ! Define which boundary condition will act on each boundary for the given variable
         call define_BC(domain, V, Vx_BC, Vy_BC, Vz_BC)
 
-        if (V%typeBC(inlet)=='custom_inlet')  then
-            call csvread(Vz_BC(inlet)%custom_inlet_file,mat_inlet)
-            ID = 0
-            do j = y%node_beg, y%node_end
-                do i = x%node_beg, x%node_end
-                    if (i/=x%node_beg .AND. i/=x%node_end .AND. j/=y%node_beg .AND. j/=y%node_end) then
-                        ID = ID + 1
-                        Vz_BC(inlet)%value(ID) = mat_inlet(i+(j-1)*x%NumberNodes)
-                    end if
-                end do
-            end do
-            Vz_BC(inlet)%value = Vz_BC(inlet)%value*Vz_BC(inlet)%custom_inlet_coeff
-        end if
+        ! if (V%typeBC(inlet)=='custom_inlet')  then
+        !     call csvread(Vz_BC(inlet)%custom_inlet_file,mat_inlet)
+        !     ID = 0
+        !     do j = y%node_beg, y%node_end
+        !         do i = x%node_beg, x%node_end
+        !             if (i/=x%node_beg .AND. i/=x%node_end .AND. j/=y%node_beg .AND. j/=y%node_end) then
+        !                 ID = ID + 1
+        !                 Vz_BC(inlet)%value(ID) = mat_inlet(i+(j-1)*x%NumberNodes)
+        !             end if
+        !         end do
+        !     end do
+        !     Vz_BC(inlet)%value = Vz_BC(inlet)%value*Vz_BC(inlet)%custom_inlet_coeff
+        ! end if
 
             ! ! Internal field initial conditions
             ! if (V%typeInit=='same_as_inlet') then
@@ -164,17 +164,17 @@
             ! Initial Boundary Conditions for Velocity
             !------------------------------------------------------------------------------------------
             ! Internal field initial conditions
-            if (V%typeInit=='same_as_inlet') then
-                V%x = 0.0
-                V%y = 0.0
-                V%z(nodes_P) = pack(spread(Vz_BC(inlet)%value,2,z%NumberCells),.TRUE.)
-            else
+            ! if (V%typeInit=='same_as_inlet') then
+            !     V%x = 0.0
+            !     V%y = 0.0
+            !     V%z(nodes_P) = pack(spread(Vz_BC(inlet)%value,2,z%NumberCells),.TRUE.)
+            ! else
                 V%x = V%init(1)
                 V%y = V%init(2)
                 if (flow_2D .eqv. .FALSE.)  then
                     V%z = V%init(3)
                 end if
-            end if
+            ! end if
 
              ! Adjust boundary conditions
             call V%BC_Adjust_x(domain, Vx_BC)
