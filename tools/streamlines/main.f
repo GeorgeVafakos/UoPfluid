@@ -98,7 +98,7 @@
 
 
         ! Choose relacation for SOR algorithm
-        r = 1.0
+        r = 1.5
 
         !------------------------------------------------------------------------------------------
         ! Solve streamline equations

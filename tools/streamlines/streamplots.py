@@ -5,6 +5,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 from numpy import array
 import sys 
+from matplotlib.ticker import AutoMinorLocator
 
 # --------------------------------------------------------------------------
 # Plots
@@ -87,25 +88,30 @@ Strm_9=1.5e-3
 Strm_10=3.0e-3
 
 # Srteamfunction levels (streamlines)
-streamlevels100=[Strm_j, Strm_i, Strm_h, Strm_g, Strm_f, Strm_e, Strm_d, Strm_c, Strm_0, Strm_1, Strm_2, Strm_3, Strm_4, Strm_5, Strm_6]
-
+streamlevels100=  [Strm_j, Strm_i, Strm_h, Strm_g, Strm_f, Strm_e, Strm_d, Strm_c, Strm_b, Strm_1, Strm_2, Strm_3]
+streamlevels1000= [-0.12, -0.116, Strm_k, Strm_j, Strm_i, Strm_h, Strm_g, Strm_f, Strm_e, -0.003, Strm_d, Strm_b, Strm_2, Strm_3, 7.0e-5, 2.0e-4, Strm_7, Strm_8, Strm_9]
+streamlevels3200= [-0.121, -0.116, Strm_k, Strm_j, Strm_i, Strm_h, Strm_g, Strm_f, Strm_e, -0.003, Strm_d, Strm_c, -5.2e-8,  Strm_2, Strm_3, Strm_5, Strm_6, Strm_7, Strm_8, Strm_9, 2.3e-3, 2.8e-3]
+streamlevels5000= [-0.121, -0.116, Strm_k, Strm_j, Strm_i, Strm_h, Strm_g, Strm_f, Strm_e, -0.003, Strm_d, Strm_c, -1.5e-6, -2.0e-7, Strm_2,  Strm_3, Strm_5, Strm_6, Strm_7, Strm_8, Strm_9, 2.3e-3, 2.8e-3]
 
 # Velocity Contour Plot
 fig = plt.figure()
 ax1 = fig.add_subplot(1, 1, 1,  aspect='equal')
 matplotlib.rcParams['contour.negative_linestyle'] = 'solid'
-# PC = ax1.contourf(x, y, psi, 50, cmap='jet',antialiased=True)
-CF =  ax1.contour(x, y, psi, streamlevels100, colors='k',linewidths=0.6)
-plt.xticks(np.arange(min(x), max(x)+0.1))
-plt.yticks(np.arange(min(y), max(y)+0.1))
-plt.title('Streamlines', **font_title)
+CF =  ax1.contour(x, y, psi, streamlevels5000, colors='k',linewidths=0.8)
+plt.xticks(np.arange(min(x), max(x)+0.1, 0.5))
+plt.yticks(np.arange(min(y), max(y)+0.1, 0.5))
+ax1.set_xticks([0.25, 0.75], minor=True)
+ax1.set_yticks([0.25, 0.75], minor=True)
+#ax1.xaxis.set_minor_locator(AutoMinorLocator())
+ax1.tick_params(which='major', length=7)
+ax1.tick_params(which='minor', length=3)
+ax1.tick_params(axis='both',direction='out', length=5)
+plt.title('Re=5000', **font_title)
 plt.xlabel('x', **font_labels)
 plt.ylabel('y', **font_labels)
 divider = make_axes_locatable(ax1)
-# cax1 = divider.append_axes("right", size="2%", pad=0.2)
-# cbar = plt.colorbar(PC, cax = cax1)
 fig.tight_layout()
+plt.savefig('CavityStreamRe5000.eps', format='eps', dpi=1000, transparent=True, bbox_inches = 'tight', pad_inches = 0) # print graph
 
 
-
-plt.show()
+#plt.show()
