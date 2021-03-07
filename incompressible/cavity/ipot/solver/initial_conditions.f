@@ -52,15 +52,6 @@
             NS_eqn%solve => SOR_vector
         end if
 
-        ! Pressure Poisson
-        if (Pres_scheme=='Jacobi') then
-            Pres_eqn%solve => jacobi_scalar
-        else if (Pres_scheme=='Gauss_Seidel') then
-            Pres_eqn%solve => gauss_seidel_scalar
-        else if (Pres_scheme == 'SOR') then
-            Pres_eqn%solve => SOR_scalar
-        end if
-
         ! Time step control
         if (adjustable_time_step .eqv. .TRUE.)  then
             Co%CFL_condition => calculate_Adj_Dt

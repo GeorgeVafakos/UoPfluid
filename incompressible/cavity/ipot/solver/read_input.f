@@ -121,12 +121,6 @@
                 if (NS_scheme/='Jacobi' .AND. NS_scheme/='Gauss_Seidel' .AND. NS_scheme/='SOR') stop 'Error: Availiable numerical schemes: Jacobi, Gauss_Seidel or SOR'
             end if
 
-            if (line=='Pres_scheme')  then
-                read(unit,*) Pres_scheme
-                if (Pres_scheme=='SOR')             read(unit,*) r
-                if (Pres_scheme/='Jacobi' .AND. Pres_scheme/='Gauss_Seidel' .AND. Pres_scheme/='SOR') stop 'Error: Availiable numerical schemes: Jacobi, Gauss_Seidel or SOR'
-            end if
-
             if (line=='advection_scheme')  then
                 read(unit,*) advection_scheme
                 if (advection_scheme/='upwind' .AND. advection_scheme/='CD' .AND. advection_scheme/='none') stop 'Error: Availiable advection schemes: upwind, CD or none'

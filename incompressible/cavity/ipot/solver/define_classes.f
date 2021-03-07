@@ -36,12 +36,12 @@
             type (duct) :: domain
 
             ! Name the boundaries (1,2,3,4,5,6 for left, right, top, bottom, front and back respectively)
-            integer, parameter :: leftWall     = 1
-            integer, parameter :: rightWall    = 2
-            integer, parameter :: topWall   = 3
-            integer, parameter :: botWall   = 4
-            integer, parameter :: frontWall = 5
-            integer, parameter :: backWall  = 6
+            integer, parameter :: leftWall      = 1
+            integer, parameter :: rightWall     = 2
+            integer, parameter :: topWall       = 3
+            integer, parameter :: botWall       = 4
+            integer, parameter :: frontWall     = 5
+            integer, parameter :: backWall      = 6
 
             !------------------------------------------------------------------------------------------
             ! Variables and Equations Classes
@@ -55,8 +55,6 @@
             ! Define equations
             type (Vector_Equation) :: NS_eqn
             character(len=20) NS_scheme
-            type (Scalar_Equation) :: Pres_eqn
-            character(len=20) Pres_scheme
 
             ! Define advection terms
             type (Advection) :: NS_adv_term

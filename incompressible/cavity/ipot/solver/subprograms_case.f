@@ -59,7 +59,6 @@
                 call H%allocate
 
                 call NS_eqn%allocate
-                call Pres_eqn%allocate
 
                 call NS_adv_term%allocate
                 call Co%allocate
@@ -146,10 +145,6 @@
                 call H%BC_Adjust_x(domain, Vx_BC)
                 call H%BC_Adjust_y(domain, Vy_BC)
                 call H%BC_Adjust_z(domain, Vz_BC)
-
-                ! Update Poisson equation B matrix (from the system Ax=B)
-                Pres_eqn%B  = A*div(H)
-
             end subroutine
 
 

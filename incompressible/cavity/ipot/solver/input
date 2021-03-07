@@ -38,7 +38,7 @@ x_begin
 0.0
 # End of x-axis
 x_end
-12.0
+1.0
 # Start of y-axis
 y_begin
 0.0
@@ -47,7 +47,7 @@ y_end
 1.0
 # x-axis stretch type (see read_input.f)
 X_stretch
-one_way_stretch
+two_way_stretch
 0.1
 3.0
 # y-axis stretch type (see read_input.f)
@@ -85,22 +85,22 @@ Co
 0.6
 # IPOT relaxation factor
 r_ipot
-50.0
+1000.0
 
 #------------------------------------------------------------------------------
 # Velocity boundary conditions
 #------------------------------------------------------------------------------
-# Inlet
+# Left wall
 V_leftWall
+no_slip
+# Right wall
+V_rightWall
+no_slip
+# Upper wall
+V_topWall
 fixed
 1.0
 0.0
-# Outlet
-V_rightWall
-zero_gradient
-# Upper wall
-V_topWall
-no_slip
 # Bottom wall
 V_botWall
 no_slip
@@ -111,12 +111,12 @@ fixed_zero
 #------------------------------------------------------------------------------
 # Pressure boundary conditions
 #------------------------------------------------------------------------------
-# Inlet
+# Left wall
 p_leftWall
 zero_gradient
-# Outlet
+# Right wall
 p_rightWall
-fixed_zero
+zero_gradient
 # Upper wall
 p_topWall
 zero_gradient

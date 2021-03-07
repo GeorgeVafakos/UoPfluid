@@ -98,18 +98,3 @@
             NS_eqn%z%aB = -nu*aB_lapl + NS_adv_term%aB
             NS_eqn%z%B  =  aP_time*V%z(nodes_P) - (1.0/rho)*gradz(p%field)
         end if
-
-
-        !------------------------------------------------------------------------------------------
-        ! Pressure Equation
-        !------------------------------------------------------------------------------------------
-        ! Poisson terms
-        Pres_eqn%aT = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aT_lapl
-        Pres_eqn%aN = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aN_lapl
-        Pres_eqn%aE = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aE_lapl
-        Pres_eqn%aP = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aP_lapl
-        Pres_eqn%aW = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aW_lapl
-        Pres_eqn%aS = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aS_lapl
-        Pres_eqn%aB = (Dx*Dy*(1.0-k_boole+k_boole*Dz))*aB_lapl
-        
-        

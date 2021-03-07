@@ -52,15 +52,6 @@
             NS_eqn%solve => SOR_vector
         end if
 
-        ! Pressure Poisson
-        if (Pres_scheme=='Jacobi') then
-            Pres_eqn%solve => jacobi_scalar
-        else if (Pres_scheme=='Gauss_Seidel') then
-            Pres_eqn%solve => gauss_seidel_scalar
-        else if (Pres_scheme == 'SOR') then
-            Pres_eqn%solve => SOR_scalar
-        end if
-
         ! Time step control
         if (adjustable_time_step .eqv. .TRUE.)  then
             Co%CFL_condition => calculate_Adj_Dt
@@ -165,9 +156,9 @@
             !------------------------------------------------------------------------------------------
             ! Internal field initial conditions
             ! if (V%typeInit=='same_as_inlet') then
-                V%x = 0.0
-                V%y = 0.0
-                V%z(nodes_P) = pack(spread(Vz_BC(inlet)%value,2,z%NumberCells),.TRUE.)
+            !     V%x = 0.0
+            !     V%y = 0.0
+            !     V%z(nodes_P) = pack(spread(Vz_BC(inlet)%value,2,z%NumberCells),.TRUE.)
             ! else
                 V%x = V%init(1)
                 V%y = V%init(2)
