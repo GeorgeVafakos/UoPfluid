@@ -133,9 +133,6 @@ fixed_zero
 # Navier-Stokes equation solution scheme
 NS_scheme
 Gauss_Seidel
-# Pressure equation solution scheme
-Pres_scheme
-Gauss_Seidel
 
 #------------------------------------------------------------------------------
 # Other parameters
