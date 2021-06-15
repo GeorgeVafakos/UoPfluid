@@ -76,7 +76,7 @@ advection_scheme
 CD
 # Kinematic viscosity
 nu
-1.0d-2
+2.0d-4
 # Density
 rho
 1.0
@@ -85,7 +85,7 @@ Co
 0.6
 # IPOT relaxation factor
 r_ipot
-100.0
+1.0
 
 #------------------------------------------------------------------------------
 # Velocity boundary conditions
