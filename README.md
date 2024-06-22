@@ -60,6 +60,7 @@ CC = gfortran-5
 ## Published work using UoPfluid
 
 1. G.P. Vafakos & P.K. Papadopoulos (2020). ‘A grid stretching technique for efficient capturing of the MHD boundary layers’, *Fusion Engineering and Design*, vol. 154, https://doi.org/10.1016/j.fusengdes.2020.111477
+2. G.P. Vafakos, A. Kafkas & P.K. Papadopoulos (2022). ‘Improved implicit potential method for incompressible flows on a fully collocated mesh’, *International Journal for Numerical Methods in Fluids*, 94(10): 1706–1723, https://doi.org/10.1002/fld.5117
 
 ## License
 
